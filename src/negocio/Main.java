@@ -1,5 +1,6 @@
 package negocio;
 
+import dataBase.*;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import interfaz.VentanaPrincipal;
 import javax.swing.UIManager;
@@ -19,11 +20,24 @@ public class Main {
 //        ventanaPrincipal.setVisible(true);
         //Comentado para poder probar unicamente el POO de lectura
         
+        System.out.println("----Aerolineas-----------");
         AerolineaClass asd = new AerolineaClass();
         asd.leerAerolineaTxt();
         
         System.out.println(asd.getID() + "\n" + asd.getNOMBRE());
         
+        
+        System.out.println("----Aeropuertos----------");
+        AeropuertoClass was = new AeropuertoClass();
+        was.leerAeropuertoTxt();
+        
+        System.out.println(was.getID() + "\n" + was.getNOMBRE() + "\n" + was.getPAISES());
+        
+        
+        System.out.println("----Tripulaciones--------");
+        
+        
+        System.out.println("----Aviones--------------");
     }
     
 }

@@ -1,4 +1,4 @@
-package negocio;
+package dataBase;
 
 public class TripulacionesClass {
     
