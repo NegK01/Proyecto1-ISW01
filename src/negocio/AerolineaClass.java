@@ -42,6 +42,6 @@ public class AerolineaClass {
     }
 
     public List<String> getNOMBRE() {
-        return NOMBRES;
+        return NOMBRES; 
     }
 }
