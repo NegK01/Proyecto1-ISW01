@@ -2,20 +2,24 @@ package interfaz;
 
 import javax.swing.JDialog;
 
-public class VentanaPrincipal extends javax.swing.JFrame {
+public class JFMenuPrincipal extends javax.swing.JFrame {
 
     JDCreacionVuelos jdCreacionVuelos;
     JDBusquedaVuelos jdBusquedaVuelos;
     JDReportes jdReportes;
     JDRegistroPasajeros jdRegistroPasajeros;
 
-    public VentanaPrincipal() {
+    public JFMenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        jdCreacionVuelos = new JDCreacionVuelos(this, rootPaneCheckingEnabled);
+        jdBusquedaVuelos = new JDBusquedaVuelos(this, rootPaneCheckingEnabled);
+        jdReportes = new JDReportes(this, rootPaneCheckingEnabled);
+        jdRegistroPasajeros = new JDRegistroPasajeros(this, rootPaneCheckingEnabled);
     }
 
     public void JDSetVisibleManager(JDialog JDialogSeleccionado) {
-        JDialogSeleccionado = new JDCreacionVuelos(this, rootPaneCheckingEnabled);
         JDialogSeleccionado.setVisible(true);
     }
 
@@ -140,19 +144,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                new JFMenuPrincipal().setVisible(true);
             }
         });
     }

@@ -2,7 +2,7 @@ package negocio;
 
 import dataBase.*;
 import com.formdev.flatlaf.FlatDarculaLaf;
-import interfaz.VentanaPrincipal;
+import interfaz.JFInicioSesión;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -16,28 +16,43 @@ public class Main {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-//        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-//        ventanaPrincipal.setVisible(true);
-        //Comentado para poder probar unicamente el POO de lectura
+        JFInicioSesión inicio = new JFInicioSesión();
+        inicio.setVisible(true);
         
-        System.out.println("----Aerolineas-----------");
+        
+        
+        
+        System.out.println("----------Aerolineas----------");
         AerolineaClass asd = new AerolineaClass();
+        
         asd.leerAerolineaTxt();
         
-        System.out.println(asd.getID() + "\n" + asd.getNOMBRE());
+        System.out.println(asd.getID() + "\n\n" + asd.getNOMBRE());
         
         
-        System.out.println("----Aeropuertos----------");
+        System.out.println("----------Aeropuertos----------");
         AeropuertoClass was = new AeropuertoClass();
+        
         was.leerAeropuertoTxt();
         
-        System.out.println(was.getID() + "\n" + was.getNOMBRE() + "\n" + was.getPAISES());
+        System.out.println(was.getID() + "\n\n" + was.getNOMBRE() + "\n\n" + was.getPAISES());
         
         
-        System.out.println("----Tripulaciones--------");
+        System.out.println("----------Tripulaciones----------");
+        TripulacionesClass nene = new TripulacionesClass();
         
+        nene.LeerTripulacionesTxt();
         
-        System.out.println("----Aviones--------------");
+        System.out.println(nene.getCEDULA()+ "\n\n" + nene.getNOMBRES() + "\n\n" + nene.getIDS()
+                + "\n\n" + nene.getROL() + "\n\n" + nene.getESTADO());
+        
+        System.out.println("----------Aviones----------");
+        AvionesClass sese = new AvionesClass();
+        
+        sese.LeerAvionesTxt();
+        
+        System.out.println(sese.getIDS() + "\n\n" + sese.getMODELO() + "\n\n" + sese.getIDS_AERO() 
+                + "\n\n" + sese.getESTADO());
     }
     
 }
