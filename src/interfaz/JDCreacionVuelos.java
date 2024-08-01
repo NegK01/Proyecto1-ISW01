@@ -5,9 +5,13 @@ import database.classes.AerolineaClass;
 import database.classes.TripulacionesClass;
 import database.classes.AvionesClass;
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.Calendar;
+import java.util.List;
+import negocio.CreacionVuelos;
 
 public class JDCreacionVuelos extends javax.swing.JDialog {
 
@@ -23,9 +27,8 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
-        cargarDatos();
 
+        cargarDatos();
     }
 
     public void cargarDatos() {
@@ -74,12 +77,17 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
         jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 170, -1));
 
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -89,8 +97,10 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         });
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 110, -1));
 
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
         jPanel1.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 320, -1));
 
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
         jPanel1.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 320, -1));
 
         jDateChooser3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -111,17 +121,17 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         jLabel5.setText("Fecha de salida:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 120, -1));
 
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 24, 1));
+        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
         jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 110, -1));
 
-        jLabel6.setText("Hora de salida:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 110, -1));
+        jLabel6.setText("Hora y minutos de salida:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, -1));
 
         jLabel7.setText("Fecha de llegada:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, -1));
 
-        jLabel8.setText("Hora de llegada:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 110, -1));
+        jLabel8.setText("Hora y minutos de llegada: ");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 200, -1));
 
         jDateChooser4.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -140,7 +150,7 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         jDateChooser4.setMaxSelectableDate(calendar.getTime());
         jDateChooser4.getDateEditor().setDateFormatString("dd/MM/yyyy");
 
-        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, valorMinimo, 24, 1));
+        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, valorMinimo, 23, 1));
         jPanel1.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 110, -1));
 
         jLabel1.setText(" Aerolinea:");
@@ -163,6 +173,20 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 100, -1));
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 80, -1));
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 80, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText(" :");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 10, 20));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setText(" :");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 10, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 390));
 
         pack();
@@ -172,50 +196,104 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
        los datos se envian mediante una lista que se estara limpiando tras cada uso
        ya que cada proceso es unitario                                               */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String aerolinea = "";
+        String aeropuertoSalida = "";
+        String aeropuertoLlegada = "";
+        Integer precioVuelo = 0;
+        String fechaDeSalida = "";
+        String fechaDeLlegada = "";
+        Integer horaSalida = 0;
+        Integer minutosSalida = 0;
+        Integer horaLlegada = 0;
+        Integer minutosLlegada = 0;
+        String noDebeContener = jComboBox5.getItemAt(0);
+        // No debe contener es un "..." lo que indica que debe seleccionar una opcion y no dejar 
+        // los 3 puntos que son la espera de la entrada de los datos
+
         try {
-            // Validacion, el precio del vuelo no puede estar vacio
-            if (!jTextField2.getText().isEmpty()) {
-                
-            } else {
-                throw new Exception("El precio del vuelo no puede estar vacio.");
+
+            if (jComboBox5.getSelectedItem().equals(noDebeContener)) {
+                throw new Exception("Complete los datos de entrada.");
+            } else if (jComboBox6.getSelectedItem().equals(noDebeContener)) {
+                throw new Exception("Complete los datos de entrada.");
+            } else if (jComboBox4.getSelectedItem().equals(noDebeContener)) {
+                throw new Exception("Complete los datos de entrada.");
             }
-            
-            
+
+            // Validacion, los aeropuertos de salida y llegada deben ser distintos
             if (!((jComboBox6.getEditor().getItem()).equals(jComboBox5.getEditor().getItem()))) {
-                
+
+                for (String aeropuertoNombre : aeropuertoClass.getNOMBRE()) {
+                    if (jComboBox5.getEditor().getItem().equals(aeropuertoNombre)) {
+                        aeropuertoSalida = (String) jComboBox5.getEditor().getItem();
+                    } else if (jComboBox6.getEditor().getItem().equals(aeropuertoNombre)) {
+                        aeropuertoLlegada = (String) jComboBox6.getEditor().getItem();
+                    }
+                }
             } else {
                 throw new Exception("El aeropuerto de salida no puede ser el mismo que el de llegada.");
             }
-            
-            
+
+            // Validacion, el precio del vuelo no puede estar vacio
+            if (!jTextField2.getText().isEmpty()) {
+                precioVuelo = Integer.parseInt(jTextField2.getText());
+            } else {
+                throw new Exception("El precio del vuelo no puede estar vacio.");
+            }
+
             // Validacion, las fechas no pueden estar nulas
             if (fecha1 != null && fecha2 != null) {
-                // Se verifica que sean iguales o no
-                if (fecha2.equals(fecha1)) {
+                // Conque no sean vacias es todo lo que nos importa desde un principio
+                fechaDeSalida = fecha1;
+                fechaDeLlegada = fecha2;
+
+                // Ahora se verifica si son iguales o no
+                if (fechaDeLlegada.equals(fechaDeSalida)) {
                     fechasIguales = true;
                 } else {
                     fechasIguales = false;
                 }
+
+                Integer fechaComparada = jDateChooser4.getCalendar().compareTo(jDateChooser3.getCalendar());
+
+                if (!fechaComparada.equals(1)) {
+                    throw new Exception("La fecha de llegada no puede ser menor a la de salida.");
+                }
+
             } else {
                 throw new Exception("Las fechas no pueden estar vacias.");
             }
 
+            // Validacion extra
             //Si las fechas son iguales, hay que corroborar que la hora sea la adecuada
             if (fechasIguales) {
-                Integer horaSalida = (Integer) jSpinner3.getValue();
-                Integer horaLlegada = (Integer) jSpinner4.getValue();
+                horaSalida = (Integer) jSpinner3.getValue();
+                horaLlegada = (Integer) jSpinner4.getValue();
+                minutosSalida = (Integer) jSpinner1.getValue();
+                minutosLlegada = (Integer) jSpinner2.getValue();
                 // Si no se cumple el caso de que la hora de salida sea menor al de llegada, estamos con un error en el tiempo  
                 if (!(horaSalida < horaLlegada)) {
-                    throw new Exception("La hora de salida no puede ser mayor o igual a la de llegada.");
+                    if (!(minutosSalida < minutosLlegada)) { // Si no se cumple la condicion correcta, se lanza un error
+                        throw new Exception("La hora de salida no puede ser mayor o igual a la de llegada.");
+                    }
                 }
             }
-            
-            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
+        aerolinea = (String) jComboBox4.getSelectedItem();
+        horaSalida = (Integer) jSpinner3.getValue();
+        horaLlegada = (Integer) jSpinner4.getValue();
+        minutosSalida = (Integer) jSpinner1.getValue();
+        minutosLlegada = (Integer) jSpinner2.getValue();
+        // Una vez todo validado, se realiza el envio de los datos a negocio
+        CreacionVuelos creacionVuelos = new CreacionVuelos(aerolinea,
+                aeropuertoSalida, aeropuertoLlegada, precioVuelo, fechaDeSalida,
+                fechaDeLlegada, horaSalida, horaLlegada, minutosSalida, minutosLlegada);
+
         // Hay que recoger un retorno por parte de negocio, esto para validar que realmente se agrego
         JOptionPane.showMessageDialog(rootPane, "Datos añadidos correctamente", "Info", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -236,7 +314,9 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
             String date = sdf.format(jDateChooser4.getDate());
             System.out.println(date);
             fecha2 = date;
+            Integer test = jDateChooser4.getCalendar().compareTo(jDateChooser3.getCalendar());
 
+            System.out.println(test);
         }
     }//GEN-LAST:event_jDateChooser4PropertyChange
 
@@ -294,6 +374,7 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -301,7 +382,10 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JTextField jTextField2;

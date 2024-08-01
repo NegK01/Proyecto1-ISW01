@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/negocio/Main.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Aerolineas.txt</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/negocio/CreacionVuelos.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Aeropuertos.txt</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/classes/AerolineaClass.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/interfaz/JDCreacionVuelos.java</file>
         </group>
     </open-files>

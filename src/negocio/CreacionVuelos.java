@@ -23,4 +23,39 @@ public class CreacionVuelos {
     Los datos de interfaz ya fueron validados en su mismo apartado, interfaz debe enviar los datos a
     negocio y este mismo enviarlos a una clase de escritura de base de datos para agregarlos a un txt
     */
+    
+    public CreacionVuelos(String aerolinea, String aeropuertoSalida, String aeropuertoLlegada , Integer precioVuelo, 
+            String fechaDeSalida, String fechaDeLlegada, Integer horaSalida, Integer horaLLegada,
+            Integer minutosSalida, Integer minutosLLegada) {
+        
+        // Todos los datos fueron agregados, ahora se deberia de leer que hay en los txt de aeropuerto, 
+        // buscando el que nos interesa
+        aerolineaClass.leerAerolineaTxt();
+        System.out.println(aerolinea);
+        
+        for (String lineaTxt : aerolineaClass.getLINEACOMPLETA()) {
+            if (lineaTxt.contains(aerolinea)) {
+                System.out.println("tru");
+                System.out.println(lineaTxt);
+            }
+        }
+        
+        
+        System.out.println(aerolinea);
+        System.out.println(aeropuertoSalida);
+        System.out.println(aeropuertoLlegada);
+        System.out.println(precioVuelo);
+        System.out.println(fechaDeSalida);
+        System.out.println(fechaDeLlegada);
+        System.out.println(horaSalida);
+        System.out.println(horaLLegada);
+        System.out.println(minutosSalida);
+        System.out.println(minutosLLegada);
+        
+        
+    }
+    
+    
+    
+    
 }
