@@ -1,9 +1,9 @@
-package database.classes;
+package database.readingClasses;
 
 import java.util.*;
 import java.io.*;
 
-public class TripulacionesClass {
+public class TripulacionesClassR {
 
     private List<Integer> IDS;
     private List<Integer> CEDULA;
@@ -13,7 +13,7 @@ public class TripulacionesClass {
     private String FILEPATH;
     private String TXT_SPLIT;
 
-    public TripulacionesClass() {
+    public TripulacionesClassR() {
         this.IDS = new ArrayList<>();
         this.CEDULA = new ArrayList<>();
         this.ESTADO = new ArrayList<>();

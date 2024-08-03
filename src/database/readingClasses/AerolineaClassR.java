@@ -1,16 +1,16 @@
-package database.classes;
+package database.readingClasses;
 
 import java.util.*;
 import java.io.*;
 
-public class AerolineaClass {
+public class AerolineaClassR {
     private List<Integer> IDS;
     private List<String> NOMBRES;
     private List<String> LINEACOMPLETA;
     private String FILEPATH;
     private String TXT_SPLIT;
 
-    public AerolineaClass() {
+    public AerolineaClassR() {
         this.IDS = new ArrayList<>();
         this.NOMBRES = new ArrayList<>();
         this.LINEACOMPLETA = new ArrayList<>();

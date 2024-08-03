@@ -1,4 +1,4 @@
-package database.classes;
+package database.readingClasses;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AeropuertoClass {
+public class AeropuertoClassR {
     private List<Integer> IDS;
     private List<String> NOMBRES;
     private List<String> PAISES;
     private String FILEPATH;
     private String TXT_SPLIT;
     
-    public AeropuertoClass() {
+    public AeropuertoClassR() {
         this.IDS = new ArrayList<>();
         this.NOMBRES = new ArrayList<>();
         this.PAISES = new ArrayList<>();

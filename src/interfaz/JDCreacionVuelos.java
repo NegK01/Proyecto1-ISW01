@@ -1,27 +1,38 @@
 package interfaz;
 
-import database.classes.AeropuertoClass;
-import database.classes.AerolineaClass;
-import database.classes.TripulacionesClass;
-import database.classes.AvionesClass;
+import database.readingClasses.AeropuertoClassR;
+import database.readingClasses.AerolineaClassR;
+import database.readingClasses.TripulacionesClassR;
+import database.readingClasses.AvionesClassR;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.Timer;
 import negocio.CreacionVuelos;
 
 public class JDCreacionVuelos extends javax.swing.JDialog {
 
-    private AerolineaClass aerolineaClass;
-    private AeropuertoClass aeropuertoClass;
-    private TripulacionesClass tripulacionesClass;
-    private AvionesClass avionesClass;
+    private AerolineaClassR aerolineaClass;
+    private AeropuertoClassR aeropuertoClass;
+    private TripulacionesClassR tripulacionesClass;
+    private AvionesClassR avionesClass;
     private boolean fechasIguales = false;
     private String fecha1;
     private String fecha2;
+    private Date dateFormat1;
+    private Date dateFormat2;
 
     public JDCreacionVuelos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -32,16 +43,16 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
     }
 
     public void cargarDatos() {
-        aerolineaClass = new AerolineaClass();
+        aerolineaClass = new AerolineaClassR();
         aerolineaClass.leerAerolineaTxt();
 
-        aeropuertoClass = new AeropuertoClass();
+        aeropuertoClass = new AeropuertoClassR();
         aeropuertoClass.leerAeropuertoTxt();
 
-        tripulacionesClass = new TripulacionesClass();
+        tripulacionesClass = new TripulacionesClassR();
         tripulacionesClass.LeerTripulacionesTxt();
 
-        avionesClass = new AvionesClass();
+        avionesClass = new AvionesClassR();
         avionesClass.LeerAvionesTxt();
 
         for (String item : aerolineaClass.getNOMBRE()) {
@@ -207,9 +218,9 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         Integer horaLlegada = 0;
         Integer minutosLlegada = 0;
         String noDebeContener = jComboBox5.getItemAt(0);
+
         // No debe contener es un "..." lo que indica que debe seleccionar una opcion y no dejar 
         // los 3 puntos que son la espera de la entrada de los datos
-
         try {
 
             if (jComboBox5.getSelectedItem().equals(noDebeContener)) {
@@ -292,18 +303,26 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         // Una vez todo validado, se realiza el envio de los datos a negocio
         CreacionVuelos creacionVuelos = new CreacionVuelos(aerolinea,
                 aeropuertoSalida, aeropuertoLlegada, precioVuelo, fechaDeSalida,
-                fechaDeLlegada, horaSalida, horaLlegada, minutosSalida, minutosLlegada);
+                fechaDeLlegada, horaSalida, horaLlegada, minutosSalida, minutosLlegada,
+                dateFormat1, dateFormat2);
 
-        // Hay que recoger un retorno por parte de negocio, esto para validar que realmente se agrego
-        JOptionPane.showMessageDialog(rootPane, "Datos añadidos correctamente", "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(rootPane, "Realizando operacion.", "Info", JOptionPane.INFORMATION_MESSAGE);
+
+        if (creacionVuelos.creacionVueloExitoso()) {
+            JOptionPane.showMessageDialog(rootPane, "Se ha realizado la creacion exitosamente.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No hay aviones disponibles para esta aerolinea.", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDateChooser3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser3PropertyChange
         if ("date".equals(evt.getPropertyName())) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String date = sdf.format(jDateChooser3.getDate());
-            System.out.println(date);
+            System.out.println(date + "1");
             fecha1 = date;
+            // Dado que se pide en el pdf que sea formato Date, ni modo, toca enviarlo asi de descuidado
+            dateFormat1 = jDateChooser3.getDate();
 
         }
     }//GEN-LAST:event_jDateChooser3PropertyChange
@@ -314,9 +333,7 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
             String date = sdf.format(jDateChooser4.getDate());
             System.out.println(date);
             fecha2 = date;
-            Integer test = jDateChooser4.getCalendar().compareTo(jDateChooser3.getCalendar());
-
-            System.out.println(test);
+            dateFormat2 = jDateChooser4.getDate();
         }
     }//GEN-LAST:event_jDateChooser4PropertyChange
 

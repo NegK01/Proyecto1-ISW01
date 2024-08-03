@@ -1,10 +1,10 @@
 
-package database.classes;
+package database.readingClasses;
 
 import java.util.*;
 import java.io.*;
 
-public class AvionesClass {
+public class AvionesClassR {
     private List<Integer> IDS;
     private List<Integer> IDS_AERO;
     private List<Integer> ESTADO;
@@ -12,7 +12,7 @@ public class AvionesClass {
     private String FILEPATH;
     private String TXT_SPLIT;
 
-    public AvionesClass() {
+    public AvionesClassR() {
         this.IDS = new ArrayList<>();
         this.IDS_AERO = new ArrayList<>();
         this.ESTADO = new ArrayList<>();
