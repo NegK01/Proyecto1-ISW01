@@ -17,8 +17,6 @@ public class UsuariosClassW {
     }
     
     public void GuardarUsuariosTxt(ArrayList datosUsuario) {
-        //Se va a reescribir los datos que teniamos por los nuevo actualizados en negocio
-        String linea;
         
         try {
             File archivo = new File("src/dataBase/files/Usuarios.txt");
