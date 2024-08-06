@@ -1,10 +1,13 @@
 package negocio;
 
+import database.writingClasses.VuelosClassW;
+import database.writingClasses.AvionesClassW;
 import database.readingClasses.*;
-import database.writtingClasses.*;
+import database.writingClasses.TripulacionesClassW;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class CreacionVuelos {
 
@@ -12,15 +15,21 @@ public class CreacionVuelos {
     AeropuertoClassR aeropuertoClass = new AeropuertoClassR();
     TripulacionesClassR tripulacionesClass = new TripulacionesClassR();
     AvionesClassR avionesClass = new AvionesClassR();
+    VuelosClassR vuelosClass = new VuelosClassR();
     AvionesClassW avionesClassW = new AvionesClassW();
     VuelosClassW vuelosClassW = new VuelosClassW();
+    TripulacionesClassW tripulacionesClassW = new TripulacionesClassW();
     String avionEncontrado = "";
     Integer ID_Vuelo = 100;
     Integer ID_AeropuertoSalida = 0;
     Integer ID_AeropuertoLlegada = 0;
     List<String> AvionesEncontrados;
-    Date salidaDate;
-    Date llegadaDate;
+    Date salidaDate = new Date();
+    Date llegadaDate = new Date();
+    long horasDiff = 0;
+    long minutosDiff = 0;
+    String timeSalida;
+    String timeLlegada;
 
     /*
     Unicamente continuarlo cuando se haya terminado el diseno UI de JDCreacionVuelos,
@@ -41,10 +50,13 @@ public class CreacionVuelos {
         aerolineaClass.leerAerolineaTxt();
         String[] lineaTxtParts;
         Integer ID_Aerolinea = 0;
+        Integer ID_Avion = 0;
+        String ID_Tripulacion = "";
+        String piloto = null;
+        String servicioCliente = null;
         Integer indice = 0;
         String avionEncontrado = "";
         AvionesEncontrados = new ArrayList<>();
-        
 
         for (String lineaTxt : aerolineaClass.getLINEACOMPLETA()) {
             if (lineaTxt.contains(aerolinea)) {
@@ -56,18 +68,56 @@ public class CreacionVuelos {
         }
 
         aeropuertoClass.leerAeropuertoTxt();
-        for (Integer ID : aeropuertoClass.getID()) {
-            if (aeropuertoClass.getNOMBRE().get(indice).equals(aeropuertoSalida)) {
-                ID_AeropuertoSalida = aeropuertoClass.getID().get(indice);
-            } else if (aeropuertoClass.getNOMBRE().get(indice).equals(aeropuertoLlegada)) {
-                ID_AeropuertoLlegada = aeropuertoClass.getID().get(indice);
+        for (int i = 0; i < aeropuertoClass.getID().size(); i++) {
+            if (aeropuertoClass.getNOMBRE().get(i).equals(aeropuertoSalida)) {
+                ID_AeropuertoSalida = aeropuertoClass.getID().get(i);
             }
+            if (aeropuertoClass.getNOMBRE().get(i).equals(aeropuertoLlegada)) {
+                ID_AeropuertoLlegada = aeropuertoClass.getID().get(i);
+            }
+        }
+
+        tripulacionesClass.LeerTripulacionesTxt();
+        indice = 0;
+        for (Integer ID : tripulacionesClass.getIDS()) {
+            if (ID.equals(ID_Aerolinea)) {
+                System.out.println("Revisando ID de aerolínea: " + ID);
+                System.out.println("Estado actual: " + tripulacionesClass.getESTADO().get(indice));
+                System.out.println("Rol actual: " + tripulacionesClass.getROL().get(indice));
+
+                if (tripulacionesClass.getESTADO().get(indice) == 0) {
+                    if (tripulacionesClass.getROL().get(indice).equals("Piloto") && piloto == null) {
+                        piloto = String.valueOf(tripulacionesClass.getCEDULA().get(indice));
+                        System.out.println("Piloto seleccionado: " + piloto);
+                    }
+                    if (tripulacionesClass.getROL().get(indice).equals("Servicio al Cliente") && servicioCliente == null) {
+                        servicioCliente = String.valueOf(tripulacionesClass.getCEDULA().get(indice));
+                        System.out.println("Servicio al Cliente seleccionado: " + servicioCliente);
+                    }
+                }
+            }
+            indice++;
+        }
+
+//        Integer nuevoEstado = 1;
+//        tripulacionesClassW.EscribirTripulacionesTxt(piloto, 1);
+//        tripulacionesClassW.EscribirTripulacionesTxt(servicioCliente, 1);
+        if (piloto != null && servicioCliente != null) {
+            System.out.println("Actualizando estado...");
+            tripulacionesClassW.EscribirTripulacionesTxt(piloto, servicioCliente, 1);
+            ID_Tripulacion = piloto + "." + servicioCliente;
+        } else {
+            System.out.println("No se encontró nadie disponible.");
         }
 
         avionesClass.LeerAvionesTxt();
         indice = 0; //Restablecemos
         for (Integer ID : avionesClass.getIDS_AERO()) {
             if (ID.equals(ID_Aerolinea)) {
+                // Ya se encontro la linea que vamos a modificar
+                // Guardamos ID del Avion
+                ID_Avion = avionesClass.getIDS().get(indice);
+
                 // Verificamos el estado del avion, 0 = disponible, 1 = en servicio
                 if (avionesClass.getESTADO().get(indice) == 0) {
                     AvionesEncontrados.add(avionesClass.getMODELO().get(indice).strip());
@@ -77,14 +127,7 @@ public class CreacionVuelos {
                             avionesClass.getMODELO().get(indice),
                             avionesClass.getIDS_AERO().get(indice),
                             modificarEstado);
-                    
-                    realizarUnionDateFormat(fechaDateFormat1, fechaDateFormat2, horaSalida, minutosSalida, horaLlegada, minutosLlegada);    
 
-                    //DateFormat es el formato original del date, cosa que pide el pdf para enviar la fecha escogida
-//                    vuelosClassW.EscribirVuelosTxt(ID_Vuelo, ID_Aerolinea, precioVuelo, fechaDateFormat1,
-//                                                   salidaDate, 
-//                                                   ID_AeropuertoSalida, fechaDateFormat2,
-//                                                   fechaDateFormat2);
                 }
                 // No hacemos break porque la aerolinea puede tener muchos aviones
             }
@@ -93,6 +136,16 @@ public class CreacionVuelos {
             // Una vez encontrado, buscamos con el indice la linea especifica para poder
             // obtener los otros datos que se convergen, es decir, el modelo del avion 
             // y otros detalles del mismo
+        }
+        realizarUnionDateFormat(fechaDateFormat1, fechaDateFormat2, horaSalida, minutosSalida, horaLlegada, minutosLlegada);
+        duracion(salidaDate, llegadaDate);
+        generarIDVuelo();
+
+
+        if (!AvionesEncontrados.isEmpty()) {
+            vuelosClassW.EscribirVuelosTxt(ID_Vuelo, ID_Aerolinea, precioVuelo, fechaDeSalida,
+                    timeSalida, ID_AeropuertoSalida, fechaDeLlegada, timeLlegada,
+                    ID_AeropuertoLlegada, horasDiff, minutosDiff, ID_Avion, ID_Tripulacion);
         }
 
         System.out.println(aerolinea);
@@ -116,8 +169,8 @@ public class CreacionVuelos {
         String dateStringLlegada = sdf.format(dateSeleccionadoLlegada);
 
         // Definir una hora específica
-        String timeSalida = horaSalida + ":" + minutosSalida; // Puedes cambiar esta hora según sea necesario
-        String timeLlegada = horaLlegada + ":" + minutosLlegada; // Puedes cambiar esta hora según sea necesario
+        timeSalida = horaSalida + ":" + minutosSalida; // Puedes cambiar esta hora según sea necesario
+        timeLlegada = horaLlegada + ":" + minutosLlegada; // Puedes cambiar esta hora según sea necesario
 
         // Combinar la fecha y la hora en una sola cadena
         String dateTimeSalida = dateStringSalida + " " + timeSalida;
@@ -145,4 +198,44 @@ public class CreacionVuelos {
         }
     }
 
+    public void generarIDVuelo() {
+        vuelosClass.LeerVuelosTxt();
+
+        ID_Vuelo = ID_Vuelo + 1;
+
+        try {
+            if (vuelosClass.getID().getLast() != null) {
+                ID_Vuelo = vuelosClass.getID().getLast() + 1;
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void duracion(Date date1, Date date2) {
+        // Asegúrate de que date1 y date2 no sean nulas
+        if (date1 == null || date2 == null) {
+            JOptionPane.showMessageDialog(null, "Las fechas no pueden ser nulas.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Convertir Date a Calendar
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(date1);
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(date2);
+
+        // Calcular la diferencia en milisegundos
+        long diferenciaMilisegundos = Math.abs(calendar2.getTimeInMillis() - calendar1.getTimeInMillis());
+        
+        // Convertir la diferencia a minutos y horas
+        long diferenciaMinutos = diferenciaMilisegundos / (1000 * 60);
+        horasDiff = diferenciaMinutos / 60;
+        minutosDiff = diferenciaMinutos % 60;
+        
+        // Imprimir la diferencia
+        System.out.println("Diferencia: " + horasDiff + " horas y " + minutosDiff + " minutos.");
+    }
 }
+

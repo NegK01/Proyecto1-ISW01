@@ -1,4 +1,4 @@
-package database.writtingClasses;
+package database.writingClasses;
 
 import database.readingClasses.AvionesClassR;
 import java.io.*;
@@ -31,7 +31,6 @@ public class AvionesClassW {
                             + avionesClassR.getIDS_AERO().get(i) + TXTSPLIT
                             + avionesClassR.getESTADO().get(i);
                 }
-
                 bw.write(linea);
                 bw.newLine();
             }

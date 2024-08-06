@@ -26,7 +26,7 @@ public class AeropuertoClassR {
             String linea;
             while ((linea = br.readLine()) != null) {
                 
-                String[] partes = linea.split(",");
+                String[] partes = linea.split(TXT_SPLIT);
                 try {
                     int id = Integer.parseInt(partes[0].trim()); // Sacamos la parte 0 que es ID
                     IDS.add(id); // Agregamos el ID al cumolo de IDS
