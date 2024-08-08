@@ -1,11 +1,11 @@
-123456789,John Smith,142,Piloto,1
-234567890,Emily Johnson,142,Piloto,1
-345678901,Sarah Williams,142,Servicio al Cliente,1
-456789012,Michael Brown,142,Servicio al Cliente,1
-567890123,James Jones,375,Piloto,1
-678901234,Linda Garcia,375,Piloto,1
-789012345,David Martinez,375,Servicio al Cliente,1
-890123456,Barbara Rodriguez,375,Servicio al Cliente,1
+123456789,John Smith,142,Piloto,0
+234567890,Emily Johnson,142,Piloto,0
+345678901,Sarah Williams,142,Servicio al Cliente,0
+456789012,Michael Brown,142,Servicio al Cliente,0
+567890123,James Jones,375,Piloto,0
+678901234,Linda Garcia,375,Piloto,0
+789012345,David Martinez,375,Servicio al Cliente,0
+890123456,Barbara Rodriguez,375,Servicio al Cliente,0
 901234567,Robert Hernandez,289,Piloto,0
 123098765,Patricia Lee,289,Piloto,0
 234109876,William Hall,289,Servicio al Cliente,0
@@ -54,7 +54,7 @@
 901432109,Frank Sanders,738,Piloto,0
 123543210,Janet Ross,738,Servicio al Cliente,0
 234654321,Scott Henderson,738,Servicio al Cliente,0
-345765432,Wayne Peterson,859,Piloto,0
-456876543,Rachel Simmons,859,Piloto,0
-567987654,Jack Powell,859,Servicio al Cliente,0
-678098765,Linda Long,859,Servicio al Cliente,0
+345765432,Wayne Peterson,859,Piloto,1
+456876543,Rachel Simmons,859,Piloto,1
+567987654,Jack Powell,859,Servicio al Cliente,1
+678098765,Linda Long,859,Servicio al Cliente,1

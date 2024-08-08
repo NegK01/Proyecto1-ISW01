@@ -1,102 +1,107 @@
+
 package interfaz;
 
+import interfaz.JDBusquedaVuelos;
+import interfaz.JDCreacionVuelos;
+import interfaz.JDReportes;
+import interfaz.JFInicioSesión;
 import javax.swing.JDialog;
 
 public class JFMenuPrincipal extends javax.swing.JFrame {
-
+    
     JDCreacionVuelos jdCreacionVuelos;
     JDBusquedaVuelos jdBusquedaVuelos;
     JDReportes jdReportes;
-    JDRegistroPasajeros jdRegistroPasajeros;
 
-    public JFMenuPrincipal() {
+    public JFMenuPrincipal(String usuarioTipo) {
         initComponents();
         setLocationRelativeTo(null);
         
         jdCreacionVuelos = new JDCreacionVuelos(this, rootPaneCheckingEnabled);
         jdBusquedaVuelos = new JDBusquedaVuelos(this, rootPaneCheckingEnabled);
         jdReportes = new JDReportes(this, rootPaneCheckingEnabled);
-        jdRegistroPasajeros = new JDRegistroPasajeros(this, rootPaneCheckingEnabled);
+        
+        HabilitarOpciones(usuarioTipo);
     }
 
     public void JDSetVisibleManager(JDialog JDialogSeleccionado) {
         JDialogSeleccionado.setVisible(true);
+    }
+    
+    public void HabilitarOpciones(String usuarioTipo) {
+        //En el caso de ser pasajero se van a remover las opciones de admin
+        //esto no va a afectar en los siguientes inicios de sesion
+        if (usuarioTipo.equals("0")) {
+            JMOpciones.remove(JMCreacionVuelos);
+            JMOpciones.remove(JMReportes);
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        JMBMenu = new javax.swing.JMenuBar();
+        JMOpciones = new javax.swing.JMenu();
+        JMCreacionVuelos = new javax.swing.JMenuItem();
+        JMBusquedaVuelos = new javax.swing.JMenuItem();
+        JMReportes = new javax.swing.JMenuItem();
+        JMCerrarSesion = new javax.swing.JMenuItem();
+        JMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Inicio de sesión");
+        JMOpciones.setText("Opciones");
 
-        jMenuItem1.setText("Creación de vuelos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        JMCreacionVuelos.setText("Creación de vuelos");
+        JMCreacionVuelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                JMCreacionVuelosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        JMOpciones.add(JMCreacionVuelos);
 
-        jMenuItem2.setText("Búsqueda de vuelos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        JMBusquedaVuelos.setText("Búsqueda de vuelos");
+        JMBusquedaVuelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                JMBusquedaVuelosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        JMOpciones.add(JMBusquedaVuelos);
 
-        jMenuItem3.setText("Reportes");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        JMReportes.setText("Reportes");
+        JMReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                JMReportesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        JMOpciones.add(JMReportes);
 
-        jMenuItem4.setText("Cerrar sesión");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        JMCerrarSesion.setText("Cerrar sesión");
+        JMCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                JMCerrarSesionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        JMOpciones.add(JMCerrarSesion);
 
-        jMenuBar1.add(jMenu1);
+        JMBMenu.add(JMOpciones);
 
-        jMenu2.setText("Registro de pasajeros");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        JMSalir.setText("Salir");
+        JMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                JMSalirMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        JMBMenu.add(JMSalir);
 
-        jMenu3.setText("Salir");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(JMBMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 482, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,29 +111,28 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+    private void JMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JMSalirMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jMenu3MouseClicked
+    }//GEN-LAST:event_JMSalirMouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void JMCreacionVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMCreacionVuelosActionPerformed
         JDSetVisibleManager(jdCreacionVuelos);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_JMCreacionVuelosActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void JMBusquedaVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMBusquedaVuelosActionPerformed
         JDSetVisibleManager(jdBusquedaVuelos);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_JMBusquedaVuelosActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void JMReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReportesActionPerformed
         JDSetVisibleManager(jdReportes);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_JMReportesActionPerformed
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        JDSetVisibleManager(jdRegistroPasajeros);
-    }//GEN-LAST:event_jMenu2MouseClicked
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void JMCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMCerrarSesionActionPerformed
+        setVisible(false);
+        
+        JFInicioSesión inicio = new JFInicioSesión();
+        inicio.setVisible(true);
+    }//GEN-LAST:event_JMCerrarSesionActionPerformed
 
     public static void main(String args[]) {
 
@@ -157,19 +161,23 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFMenuPrincipal().setVisible(true);
+                //Posible problema por mandar la variable usuarioTipo, inicioSesion
+                try {
+                    new JFMenuPrincipal(null).setVisible(true);
+                } catch (Exception e) {
+                    System.out.println("Fue null");
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuBar JMBMenu;
+    private javax.swing.JMenuItem JMBusquedaVuelos;
+    private javax.swing.JMenuItem JMCerrarSesion;
+    private javax.swing.JMenuItem JMCreacionVuelos;
+    private javax.swing.JMenu JMOpciones;
+    private javax.swing.JMenuItem JMReportes;
+    private javax.swing.JMenu JMSalir;
     // End of variables declaration//GEN-END:variables
 }

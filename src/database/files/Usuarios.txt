@@ -1,2 +1,2 @@
-987654321,Lucas,40,123,lucaslr0106@gmail.com,Admin
-123456789,Mau,1000,123,estoesuncorreo@gmail.com,Admin
+987654321,Admin,18,123,admin@gmail.com,1
+123456789,pepe,18,123,pepe@gmail.com,1

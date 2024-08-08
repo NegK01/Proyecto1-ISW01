@@ -204,11 +204,14 @@ public class CreacionVuelos {
         ID_Vuelo = ID_Vuelo + 1;
 
         try {
-            if (vuelosClass.getID().getLast() != null) {
-                ID_Vuelo = vuelosClass.getID().getLast() + 1;
-            }
-        } catch (Exception e) {
+        // Verifica si la lista no está vacía antes de intentar acceder al último elemento
+        if (!vuelosClass.getID().isEmpty()) {
+            // Obtiene el último ID y suma 1
+            ID_Vuelo = vuelosClass.getID().get(vuelosClass.getID().size() - 1) + 1;
         }
+    } catch (Exception e) {
+        System.out.println("\u001B[31mERROR:\u001B[0m " + e.getMessage());
+    }
 
     }
 
