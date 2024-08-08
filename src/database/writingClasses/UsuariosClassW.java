@@ -42,7 +42,7 @@ public class UsuariosClassW {
             
             
             Lector.write(linea);
-            //Cerramos el lector
+            //Cerramos el lector 
             Lector.close();
             
         } catch (IOException e) {
