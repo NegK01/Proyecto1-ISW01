@@ -206,9 +206,9 @@ public class CreacionVuelos {
         ID_Vuelo = ID_Vuelo + 1;
 
         try {
-            // Verifica si la lista no está vacía antes de intentar acceder al último elemento
+            // Verifica si la lista no esta vacia antes de intentar acceder al ultimo elemento
             if (!vuelosClass.getID().isEmpty()) {
-                // Obtiene el último ID y suma 1
+                // Obtiene el ultimo ID y suma 1
                 ID_Vuelo = vuelosClass.getID().get(vuelosClass.getID().size() - 1) + 1;
             }
         } catch (Exception e) {
@@ -218,7 +218,6 @@ public class CreacionVuelos {
     }
 
     public void duracion(Date date1, Date date2) {
-        // Asegúrate de que date1 y date2 no sean nulas
         if (date1 == null || date2 == null) {
             JOptionPane.showMessageDialog(null, "Las fechas no pueden ser nulas.", "Error", JOptionPane.WARNING_MESSAGE);
             return;

@@ -41,8 +41,8 @@ public class Correo {
         // Configuración del servidor SMTP, usamos el servicio host de gmail
         String host = "smtp.gmail.com";
         String port = "587"; // el puerto por defecto de este host
-        final String user = "mauricio.or99@gmail.com"; // Correo con el que enviaremos los datos
-        final String password = ""; // el token de nuestro correo, (recordar deshabilitarlo)
+        final String user = "mandangaymerequetengue@gmail.com"; // Correo con el que enviaremos los datos
+        final String password = "anwz qawd elpi tbhw"; // el token de nuestro correo
 
         // Propiedades del correo donde asignamos el host, puerto y autenticacion
         Properties props = new Properties();
@@ -62,7 +62,7 @@ public class Correo {
             // Crear un objeto MimeMessage
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lopezrodriguezlucas10@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mauricio.or999@gmail.com"));
             message.setSubject("Factura Compra de Vuelo.");
 
             // Crear un cuerpo del email (texto nomas) 

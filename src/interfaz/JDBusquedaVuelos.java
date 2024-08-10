@@ -2,7 +2,7 @@ package interfaz;
 
 import database.readingClasses.AerolineaClassR;
 import database.readingClasses.AeropuertoClassR;
-import negocio.Busqueda_Vuelos;
+import negocio.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +20,8 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
     private Date dateFormat;
 
     private AeropuertoClassR aeropuertoClass;
+
+    private AsignacionDeAsientos asignacionDeAsientos;
 
     public JDBusquedaVuelos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -90,12 +92,12 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
     public void Vuelo_Seleccionado() {
         AeropuertoClassR aeropuertoClassR = new AeropuertoClassR();
         aeropuertoClassR.leerAeropuertoTxt();
-        
+
         AerolineaClassR aerolineaClassR = new AerolineaClassR();
         aerolineaClassR.leerAerolineaTxt();
-        
+
         int vainaSeleccionadaRow;
-        
+
         try {
             vainaSeleccionadaRow = JTVuelosDisponibles.getSelectedRow();
 
@@ -108,39 +110,40 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             String precio = JTVuelosDisponibles.getValueAt(vainaSeleccionadaRow, 6).toString();
             String duracion = JTVuelosDisponibles.getValueAt(vainaSeleccionadaRow, 7).toString();
             String cantidad = JSCantidad.getValue().toString();
-            
+
             for (int j = 0; j < aerolineaClassR.getNOMBRE().size(); j++) {
                 if (aerolineaClassR.getNOMBRE().get(j).contains(aero)) {
                     aero = aerolineaClassR.getID().get(j).toString();
-                    
+
                 }
             }
-            
+
             for (int i = 0; i < aeropuertoClassR.getNOMBRE().size(); i++) {
                 if (aeropuertoClassR.getNOMBRE().get(i).contains(salida_in)) {
                     salida_in = aeropuertoClassR.getID().get(i).toString();
-                    
+
                 } else if (aeropuertoClassR.getNOMBRE().get(i).contains(llegada_out)) {
                     llegada_out = aeropuertoClassR.getID().get(i).toString();
-                    
+
                 } else if (aeropuertoClassR.getNOMBRE().get(i).contains(escala)) {
                     escala = aeropuertoClassR.getID().get(i).toString();
-                    
+
                 } else if (escala.contains("Sin escala")) {
                     escala = "000";
                 }
             }
 
-            String vuelo_seleccionado = aero + " " + salida_in + " " + hora_in + " " + llegada_out 
-                    + " " + hora_out + " " + escala + " " + precio + " " + duracion + " " + cantidad;
+            String vuelo_seleccionado = aero + "," + salida_in + "," + hora_in + "," + llegada_out
+                    + "," + hora_out + "," + escala + "," + precio + "," + duracion + "," + cantidad;
 
-            System.out.println(vuelo_seleccionado);
-            
+            asignacionDeAsientos = new AsignacionDeAsientos();
+            asignacionDeAsientos.AsignacionDeAsientos(vuelo_seleccionado);
+
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Error...Seleccione un vuelo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")

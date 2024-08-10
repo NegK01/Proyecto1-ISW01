@@ -26,7 +26,7 @@ public class AerolineaClassR {
                 String[] partes = linea.split(TXT_SPLIT);
                 try {
                     int id = Integer.parseInt(partes[0].trim()); // Sacamos la parte 0 que es ID
-                    IDS.add(id); // Agregamos el ID al cumolo de IDS
+                    IDS.add(id); // Agregamos el ID al cumulo de IDS
                     NOMBRES.add(partes[1].trim());
                     LINEACOMPLETA.add(linea.trim());
                     
