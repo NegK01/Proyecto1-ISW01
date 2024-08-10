@@ -1,7 +1,7 @@
 package negocio;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import interfaz.VentanaPrincipal;
+import interfaz.JFInicioSesión;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -15,14 +15,12 @@ public class Main {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-//        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-//        ventanaPrincipal.setVisible(true);
-        //Comentado para poder probar unicamente el POO de lectura
+        Correo correo = new Correo();
+//        correo.Correo();
         
-        AerolineaClass asd = new AerolineaClass();
-        asd.leerAerolineaTxt();
+        JFInicioSesión inicio = new JFInicioSesión();
+        inicio.setVisible(true);
         
-        System.out.println(asd.getID() + "\n" + asd.getNOMBRE());
         
     }
     
