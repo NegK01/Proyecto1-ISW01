@@ -271,23 +271,20 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
                 horaLlegada = (Integer) JSHoraLlegada.getValue();
                 minutosSalida = (Integer) JSMinutosSalida.getValue();
                 minutosLlegada = (Integer) JSMinutosLlegada.getValue();
-                
+
                 // Calcular la diferencia en minutos entre la hora de salida y la hora de llegada
                 int diferenciaHoras = horaLlegada - horaSalida;
                 int diferenciaMinutos = minutosLlegada - minutosSalida;
+                int minutosTotales = diferenciaHoras * 60 + diferenciaMinutos;
 
                 if (horaSalida == horaLlegada) {
                     if (minutosSalida >= minutosLlegada) {
                         throw new Exception("La hora de salida no puede ser mayor o igual a la de llegada.");
+                    } else if (diferenciaMinutos < 60) {
+                        throw new Exception("Debe haber al menos una hora de diferencia entre la hora de salida y la hora de llegada.");
                     }
                 } else if (horaSalida > horaLlegada) {
                     throw new Exception("La hora de salida no puede ser mayor a la de llegada.");
-                } else {
-                    // Cuando las horas no son iguales, verificamos si la diferencia total es menor a 60 minutos
-                    int diferenciaTotal = diferenciaHoras * 60 + diferenciaMinutos;
-                    if (diferenciaTotal < 60) {
-                        throw new Exception("Debe haber al menos una hora de diferencia entre la hora de salida y la hora de llegada.");
-                    }
                 }
             }
 
@@ -320,11 +317,10 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         if ("date".equals(evt.getPropertyName())) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String date = sdf.format(JDFechaSalida.getDate());
-            System.out.println(date + "1");
+            System.out.println(date);
             fecha1 = date;
             // Dado que se pide en el pdf que sea formato Date, ni modo, toca enviarlo asi de descuidado
             dateFormat1 = JDFechaSalida.getDate();
-
         }
     }//GEN-LAST:event_JDFechaSalidaPropertyChange
 

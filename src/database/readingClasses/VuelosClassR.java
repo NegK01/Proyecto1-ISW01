@@ -4,7 +4,6 @@ import java.util.*;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 
 public class VuelosClassR {
     private List<Integer> ID;
@@ -14,7 +13,8 @@ public class VuelosClassR {
     private List<Integer> ID_IN;
     private List<Date> FECHA_OUT;
     private List<Integer> ID_OUT;
-    private List<LocalTime> DURACION;
+    private List<Integer> HORAS;
+    private List<Integer> MINUTOS;
     private List<Integer> ID_AVION;
     private List<String> ID_TRIPULACION;
     private String FILEPATH;
@@ -28,7 +28,8 @@ public class VuelosClassR {
         this.ID_IN = new ArrayList<>();
         this.FECHA_OUT = new ArrayList<>();
         this.ID_OUT = new ArrayList<>();
-        this.DURACION = new ArrayList<>();
+        this.HORAS = new ArrayList<>();
+        this.MINUTOS = new ArrayList<>();
         this.ID_AVION = new ArrayList<>();
         this.ID_TRIPULACION = new ArrayList<>();
         this.FILEPATH = "src/dataBase/files/Vuelos.txt";
@@ -66,10 +67,11 @@ public class VuelosClassR {
                     int id_out = Integer.parseInt(partes[8]);
                     ID_OUT.add(id_out);
                     
-//                    int hora = Integer.parseInt(partes[9]);
-//                    int minuto = Integer.parseInt(partes[10]);
-//                    LocalTime duracion = LocalTime.of(hora, minuto);
-//                    DURACION.add(duracion);
+                    int horas = Integer.parseInt(partes[9]);
+                    HORAS.add(horas);
+                    
+                    int minutos = Integer.parseInt(partes[10]);
+                    MINUTOS.add(minutos);
                     
                     int id_avion = Integer.parseInt(partes[11]);
                     ID_AVION.add(id_avion);
@@ -114,8 +116,12 @@ public class VuelosClassR {
         return ID_OUT;
     }
 
-    public List<LocalTime> getDURACION() {
-        return DURACION;
+    public List<Integer> getHORAS() {
+        return HORAS;
+    }
+    
+    public List<Integer> getMINUTOS() {
+        return MINUTOS;
     }
 
     public List<Integer> getID_AVION() {
