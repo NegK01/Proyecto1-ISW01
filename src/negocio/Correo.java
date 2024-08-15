@@ -2,19 +2,20 @@ package negocio;
 
 import java.util.*;
 import database.readingClasses.AeropuertoClassR;
-import net.glxn.qrgen.QRCode;
+import database.readingClasses.HistorialClassR;
+import database.readingClasses.UsuariosClassR;
 import net.glxn.qrgen.image.ImageType;
 import java.io.FileOutputStream;
+import net.glxn.qrgen.QRCode;
 import java.io.IOException;
 import java.io.File;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
-import database.readingClasses.HistorialClassR;
-import database.readingClasses.UsuariosClassR;
 
 public class Correo {
 
+    private String correo;
     private boolean compra = true;
 
     public void Correo() throws java.text.ParseException {
@@ -45,6 +46,20 @@ public class Correo {
     }
 
     public void EnviarCorreo() throws java.text.ParseException {
+        HistorialClassR historial = new HistorialClassR();
+        historial.leerHistorialTxt();
+        
+        UsuariosClassR usuarios = new UsuariosClassR();
+        usuarios.LeerUsuariosTxt();
+        
+        Integer indice = historial.getCEDULA().size() - 1;
+        Integer cedula = historial.getCEDULA().get(indice);
+        for (int i = 0; i < usuarios.getCEDULA().size(); i++) {
+            if (usuarios.getCEDULA().get(i).equals(cedula)) {
+                correo = usuarios.getCORREO().get(i);
+            }
+        }
+        
         // Configuración del servidor SMTP, usamos el servicio host de gmail
         String host = "smtp.gmail.com";
         String port = "587"; // el puerto por defecto de este host
@@ -69,7 +84,7 @@ public class Correo {
             // Crear un objeto MimeMessage
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lopezrodriguezlucas10@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
             message.setSubject("Factura Compra de Vuelo.");
 
             // Crear un cuerpo del email (texto nomas) 
@@ -95,6 +110,7 @@ public class Correo {
             Transport.send(message);
 
             System.out.println("\u001B[32mCorreo enviado exitosamente.\u001B[0m ");
+            correo = "";
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -30,7 +30,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setSize(815, 430);
+        setSize(815, 380);
 
         Cargar_ComboBox();
     }
@@ -174,7 +174,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         JTTexto5 = new javax.swing.JLabel();
         Arriba_Abajo = new javax.swing.JScrollPane();
         JTVuelosDisponibles = new javax.swing.JTable();
-        JBSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -258,6 +257,11 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             }
         });
         JTVuelosDisponibles.getTableHeader().setReorderingAllowed(false);
+        JTVuelosDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTVuelosDisponiblesMouseClicked(evt);
+            }
+        });
         Arriba_Abajo.setViewportView(JTVuelosDisponibles);
         if (JTVuelosDisponibles.getColumnModel().getColumnCount() > 0) {
             JTVuelosDisponibles.getColumnModel().getColumn(0).setResizable(false);
@@ -279,14 +283,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         }
 
         getContentPane().add(Arriba_Abajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 740, 100));
-
-        JBSeleccionar.setText("Seleccionar vuelo");
-        JBSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBSeleccionarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(JBSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 330, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -313,13 +309,13 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         Comprobar_Busqueda();
     }//GEN-LAST:event_JCAeroLlegadaActionPerformed
 
-    private void JBSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSeleccionarActionPerformed
+    private void JTVuelosDisponiblesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTVuelosDisponiblesMouseClicked
         try {
             Vuelo_Seleccionado();
         } catch (ParseException ex) {
             Logger.getLogger(JDBusquedaVuelos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_JBSeleccionarActionPerformed
+    }//GEN-LAST:event_JTVuelosDisponiblesMouseClicked
 
     public static void main(String args[]) {
 
@@ -362,7 +358,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Arriba_Abajo;
-    private javax.swing.JButton JBSeleccionar;
     private javax.swing.JComboBox<String> JCAeroLlegada;
     private javax.swing.JComboBox<String> JCAeroSalida;
     private com.toedter.calendar.JDateChooser JDCFechaSalida;
