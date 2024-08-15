@@ -18,17 +18,17 @@ public class VuelosClassW {
             String fechaDeSalida, String horaSalida, Integer ID_AeropuertoSalida,
             String fechaDeLlegada, String horaLlegada, Integer ID_AeropuertoLlegada,
             long horasDiff, long minutosDiff, Integer ID_Avion, String ID_Tripulacion) {
-        try (BufferedWriter br = new BufferedWriter(new FileWriter("src/database/files/Vuelos.txt", true))){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/database/files/Vuelos.txt", true))){
             
             linea = ID_Vuelo + TXTSPLIT + ID_Aerolinea + TXTSPLIT + precioVuelo + TXTSPLIT +
                     fechaDeSalida + TXTSPLIT + horaSalida + TXTSPLIT + ID_AeropuertoSalida + TXTSPLIT + 
                     fechaDeLlegada + TXTSPLIT + horaLlegada + TXTSPLIT + ID_AeropuertoLlegada + TXTSPLIT +
                     horasDiff + TXTSPLIT + minutosDiff + TXTSPLIT + ID_Avion + TXTSPLIT + ID_Tripulacion;
             
-            br.write(linea);
-            br.newLine();
+            bw.write(linea);
+            bw.newLine();
         } catch (Exception e) {
-            System.out.println("\u001B[31mERROR:\u001B[0m " + e);
+            System.out.println("\u001B[31mERROR:\u001B[0m " + e.getMessage());
         }
     }
 }

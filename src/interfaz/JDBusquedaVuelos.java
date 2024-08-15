@@ -2,33 +2,37 @@ package interfaz;
 
 import database.readingClasses.AerolineaClassR;
 import database.readingClasses.AeropuertoClassR;
-import negocio.*;
+import database.readingClasses.HistorialClassR;
+import negocio.Busqueda_Vuelos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import negocio.AsignacionDeAsientos;
 
 public class JDBusquedaVuelos extends javax.swing.JDialog {
 
+    private String identificador;
+    
     private String llegada;
     private String salida;
     private String fecha;
     private Date dateFormat;
-
+    private Integer cedulaActual;
     private AeropuertoClassR aeropuertoClass;
 
-    private AsignacionDeAsientos asignacionDeAsientos;
-
-    public JDBusquedaVuelos(java.awt.Frame parent, boolean modal) {
+    public JDBusquedaVuelos(java.awt.Frame parent, boolean modal, Integer qweqweqw) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setSize(815, 430);
-
+        setSize(815, 380);
+        this.cedulaActual = qweqweqw;
         Cargar_ComboBox();
     }
 
@@ -68,6 +72,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             Vuelos = negocio.Mostrar_Vuelos(salida, llegada, dateFormat);
 
             cargar_Vuelos(Vuelos);
+            
         } else {
             DefaultTableModel Modelo = (DefaultTableModel) JTVuelosDisponibles.getModel();
             Modelo.setRowCount(0);
@@ -83,21 +88,27 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
             ArrayList vuelo = new ArrayList();
             vuelo = (ArrayList) Vuelos.get(i);
+            
+            //CUIDADO CON ESTO
+            identificador = vuelo.get(8).toString();
 
             Modelo.addRow(new Object[]{vuelo.get(0), vuelo.get(1), vuelo.get(2), vuelo.get(3),
                 vuelo.get(4), vuelo.get(5), vuelo.get(6), vuelo.get(7)});
         }
     }
 
-    public void Vuelo_Seleccionado() {
+    public void Vuelo_Seleccionado() throws ParseException {
         AeropuertoClassR aeropuertoClassR = new AeropuertoClassR();
         aeropuertoClassR.leerAeropuertoTxt();
-
+        
         AerolineaClassR aerolineaClassR = new AerolineaClassR();
         aerolineaClassR.leerAerolineaTxt();
-
+        
+        HistorialClassR historial = new HistorialClassR();
+        historial.leerHistorialTxt();
+        
         int vainaSeleccionadaRow;
-
+        
         try {
             vainaSeleccionadaRow = JTVuelosDisponibles.getSelectedRow();
 
@@ -110,40 +121,47 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             String precio = JTVuelosDisponibles.getValueAt(vainaSeleccionadaRow, 6).toString();
             String duracion = JTVuelosDisponibles.getValueAt(vainaSeleccionadaRow, 7).toString();
             String cantidad = JSCantidad.getValue().toString();
-
+            
             for (int j = 0; j < aerolineaClassR.getNOMBRE().size(); j++) {
                 if (aerolineaClassR.getNOMBRE().get(j).contains(aero)) {
                     aero = aerolineaClassR.getID().get(j).toString();
-
+                    
                 }
             }
-
+            
             for (int i = 0; i < aeropuertoClassR.getNOMBRE().size(); i++) {
                 if (aeropuertoClassR.getNOMBRE().get(i).contains(salida_in)) {
                     salida_in = aeropuertoClassR.getID().get(i).toString();
-
+                    
                 } else if (aeropuertoClassR.getNOMBRE().get(i).contains(llegada_out)) {
                     llegada_out = aeropuertoClassR.getID().get(i).toString();
-
+                    
                 } else if (aeropuertoClassR.getNOMBRE().get(i).contains(escala)) {
                     escala = aeropuertoClassR.getID().get(i).toString();
-
+                    
                 } else if (escala.contains("Sin escala")) {
                     escala = "000";
                 }
             }
+            
+            String vuelo_seleccionado = aero + "," + salida_in + "," + hora_in + "," + llegada_out 
+                    + "," + hora_out + "," + escala + "," + precio + "," + duracion + "," + cantidad 
+                    + "," + identificador + "," + cedulaActual;
+            
+            //Lo hago por si acaso en los siguentes procesos n se limpia
+//            identificador = "";
 
-            String vuelo_seleccionado = aero + "," + salida_in + "," + hora_in + "," + llegada_out
-                    + "," + hora_out + "," + escala + "," + precio + "," + duracion + "," + cantidad;
-
-            asignacionDeAsientos = new AsignacionDeAsientos();
+            AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
             asignacionDeAsientos.AsignacionDeAsientos(vuelo_seleccionado);
 
+            System.out.println(vuelo_seleccionado + " JDBusqueda");
+            
         } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error...Seleccione un vuelo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -161,7 +179,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         JTTexto5 = new javax.swing.JLabel();
         Arriba_Abajo = new javax.swing.JScrollPane();
         JTVuelosDisponibles = new javax.swing.JTable();
-        JBSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -245,6 +262,11 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             }
         });
         JTVuelosDisponibles.getTableHeader().setReorderingAllowed(false);
+        JTVuelosDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTVuelosDisponiblesMouseClicked(evt);
+            }
+        });
         Arriba_Abajo.setViewportView(JTVuelosDisponibles);
         if (JTVuelosDisponibles.getColumnModel().getColumnCount() > 0) {
             JTVuelosDisponibles.getColumnModel().getColumn(0).setResizable(false);
@@ -267,14 +289,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
         getContentPane().add(Arriba_Abajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 740, 100));
 
-        JBSeleccionar.setText("Seleccionar vuelo");
-        JBSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBSeleccionarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(JBSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 330, 150, 40));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -291,7 +305,15 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_JDCFechaSalidaPropertyChange
-
+//
+//    public void guardarCedulaActual(Integer cedulaDada) {
+//        cedulaActual1 = cedulaDada;
+//        System.out.println(cedulaDada);
+////        System.out.println(cedulaActual);
+//        AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
+////        asignacionDeAsientos.guardarCedulaActual(cedulaActual);
+//    }
+    
     private void JCAeroSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCAeroSalidaActionPerformed
         Comprobar_Busqueda();
     }//GEN-LAST:event_JCAeroSalidaActionPerformed
@@ -300,9 +322,13 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         Comprobar_Busqueda();
     }//GEN-LAST:event_JCAeroLlegadaActionPerformed
 
-    private void JBSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSeleccionarActionPerformed
-        Vuelo_Seleccionado();
-    }//GEN-LAST:event_JBSeleccionarActionPerformed
+    private void JTVuelosDisponiblesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTVuelosDisponiblesMouseClicked
+        try {
+            Vuelo_Seleccionado();
+        } catch (ParseException ex) {
+            Logger.getLogger(JDBusquedaVuelos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_JTVuelosDisponiblesMouseClicked
 
     public static void main(String args[]) {
 
@@ -331,7 +357,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDBusquedaVuelos dialog = new JDBusquedaVuelos(new javax.swing.JFrame(), true);
+                JDBusquedaVuelos dialog = new JDBusquedaVuelos(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -345,7 +371,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Arriba_Abajo;
-    private javax.swing.JButton JBSeleccionar;
     private javax.swing.JComboBox<String> JCAeroLlegada;
     private javax.swing.JComboBox<String> JCAeroSalida;
     private com.toedter.calendar.JDateChooser JDCFechaSalida;

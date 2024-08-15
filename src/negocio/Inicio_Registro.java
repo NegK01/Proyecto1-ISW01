@@ -9,14 +9,12 @@ public class Inicio_Registro {
     //Para poder utilizar la clase usuarios
     UsuariosClassR usuariosR = new UsuariosClassR();
     UsuariosClassW usuariosW = new UsuariosClassW();
-    private int cedulaActualDelUsr;
 
     public String DarAcceso(int cedulaDada, String contraseñaDada) {
         //Leemos el txt
         usuariosR.LeerUsuariosTxt();
 
         String usuarioTipo = "";
-        cedulaActualDelUsr = cedulaDada;
 
         //Se revisa de uno en uno las datos que hay en las listas
         for (int i = 0; i < usuariosR.getCEDULA().size(); i++) {
@@ -55,9 +53,5 @@ public class Inicio_Registro {
 
         //Mandamos a JDRegistroPasajeros para enseñar mensaje
         return validar;
-    }
-
-    public int getCedulaActualDelUsr() {
-        return cedulaActualDelUsr;
     }
 }

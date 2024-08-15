@@ -184,6 +184,8 @@ public class Busqueda_Vuelos {
                     Vuelo.add(vuelosClassR.getPRECIO().get(x));
 
                     Vuelo.add(vuelosClassR.getHORAS().get(x) + ":" + vuelosClassR.getMINUTOS().get(x));
+                    
+                    Vuelo.add(id_vuelo.toString() + "000");
 
                     Vuelos_Totales.add(Vuelo);
                 }
@@ -255,6 +257,8 @@ public class Busqueda_Vuelos {
             minutos_Totales = minuto1 + minuto2;
 
             Vuelo.add(horas_Totales + ":" + minutos_Totales);
+            
+            Vuelo.add(id_escala1.toString() + id_escala2.toString());
 
             Vuelos_Totales.add(Vuelo);
         }

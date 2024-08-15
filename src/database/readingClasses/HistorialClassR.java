@@ -50,14 +50,14 @@ public class HistorialClassR {
 
                 String[] partes = linea.split(TXT_SPLIT);
                 try {
-                    ID.add(Integer.parseInt(partes[0].trim()));
+                    ID.add( Integer.parseInt(partes[0].trim()));
                     CEDULA.add(Integer.parseInt(partes[1].trim()));
                     ID_SALIDA.add(Integer.parseInt(partes[2].trim()));
                     ID_LLEGADA.add(Integer.parseInt(partes[3].trim()));
                     ID_ESCALA.add(Integer.parseInt(partes[4].trim()));
 
                     String fechaStr = partes[5].trim();
-                    fecha = formatoOriginal.parse(fechaStr);
+                    fecha = nuevoFormato.parse(fechaStr);
                     FECHA.add(fecha);
 
                     CAN_BOLETOS.add(Integer.parseInt(partes[6].trim()));

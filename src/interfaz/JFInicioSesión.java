@@ -4,38 +4,38 @@ import interfaz.JDRegistroPasajeros;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import negocio.Inicio_Registro;
+import negocio.*;
 
 public class JFInicioSesión extends javax.swing.JFrame {
-    
+    JDBusquedaVuelos enviarCedula = new JDBusquedaVuelos(this, rootPaneCheckingEnabled, null);
     Inicio_Registro negocio = new Inicio_Registro();
 
     public JFInicioSesión() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
         Restringir_Datos();
     }
-    
+
     //Metodo para negar diferentes tipos de parametros al teclado
     public void Restringir_Datos() {
         JTCedula.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                
+
                 //Se consume en el caso de que no sea un digito o supere la cantidad de 9
                 if (!Character.isDigit(c) || JTCedula.getText().length() > 8) {
                     e.consume();
                 }
             }
         });
-        
+
         JPContraseña.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                
+
                 //Se consume en el caso de que sea un espacio o supere cantidad
                 if (Character.isSpaceChar(c) || JPContraseña.getText().length() > 19) {
                     e.consume();
@@ -47,32 +47,36 @@ public class JFInicioSesión extends javax.swing.JFrame {
     public void Comprobar_Inicio() {
         //Variable string que almasena si es admin o pasajero
         String usuarioTipo = "";
-        
+
         if (JTCedula.getText().length() > 8 && JPContraseña.getText().length() > 0) {
-            
+
             //Almacenamos datos de interfaz
             int cedula = Integer.parseInt(JTCedula.getText());
             String contraseña = JPContraseña.getText();
-            
+
             //Se llama la funcion que tiene de datos las variables de la interfaz y 
             //si existe el usuario almacena su tipo
             usuarioTipo = negocio.DarAcceso(cedula, contraseña);
-            
+
             //Existe y obtiene ecceso a el menu principal
             if (usuarioTipo.equals("0") || usuarioTipo.equals("1")) {
                 //Se cierra el inicio de sesion y despues se abre el menu de opciones
                 setVisible(false);
-                
+
                 //Habilitamos el menu principal y mandamos la variable usuario tipo
                 //para restringir diferentes opciones
-                JFMenuPrincipal menu = new JFMenuPrincipal(usuarioTipo);
+                System.out.println(cedula);
+//                enviarCedula.guardarCedulaActual(cedula);
+                
+                
+                JFMenuPrincipal menu = new JFMenuPrincipal(usuarioTipo, cedula);
                 menu.setVisible(true);
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario no encontrado",
-                    "Mensaje", JOptionPane.NO_OPTION);
+                        "Mensaje", JOptionPane.NO_OPTION);
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Rellene correctamente los Espacios",
                     "Error", JOptionPane.ERROR_MESSAGE);

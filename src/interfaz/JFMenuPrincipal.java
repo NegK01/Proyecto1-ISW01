@@ -13,12 +13,12 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     JDBusquedaVuelos jdBusquedaVuelos;
     JDReportes jdReportes;
 
-    public JFMenuPrincipal(String usuarioTipo) {
+    public JFMenuPrincipal(String usuarioTipo, Integer cedulaActual) {
         initComponents();
         setLocationRelativeTo(null);
         
         jdCreacionVuelos = new JDCreacionVuelos(this, rootPaneCheckingEnabled);
-        jdBusquedaVuelos = new JDBusquedaVuelos(this, rootPaneCheckingEnabled);
+        jdBusquedaVuelos = new JDBusquedaVuelos(this, rootPaneCheckingEnabled, cedulaActual);
         jdReportes = new JDReportes(this, rootPaneCheckingEnabled);
         
         HabilitarOpciones(usuarioTipo);
@@ -161,9 +161,9 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //Posible problema por mandar la variable usuarioTipo, inicioSesion
+                //Posible problema por mandar la variable usuarioTipo y cedula, inicioSesion
                 try {
-                    new JFMenuPrincipal(null).setVisible(true);
+                    new JFMenuPrincipal(null, null).setVisible(true);
                 } catch (Exception e) {
                     System.out.println("Fue null");
                 }
