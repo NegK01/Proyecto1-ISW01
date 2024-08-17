@@ -172,7 +172,7 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
                 JBAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(JBAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 100, -1));
+        jPanel1.add(JBAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 150, 40));
 
         JSMinutosSalida.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
         jPanel1.add(JSMinutosSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 90, -1));
