@@ -15,6 +15,7 @@ public class JDRegistroPasajeros extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
         
         RestingirRegistro();
     }

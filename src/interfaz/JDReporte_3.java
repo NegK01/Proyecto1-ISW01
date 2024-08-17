@@ -19,6 +19,7 @@ public class JDReporte_3 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
 
         Cargar_ComboBox();
     }
@@ -67,7 +68,7 @@ public class JDReporte_3 extends javax.swing.JDialog {
 
         JLTexto1.setText("Cedula del cliente a buscar:");
 
-        JCBCedulaSelect.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JCBCedulaSelect.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         JCBCedulaSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
         JCBCedulaSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +101,7 @@ public class JDReporte_3 extends javax.swing.JDialog {
         Arriba_Abajo.setViewportView(JTComprasPasajero);
         if (JTComprasPasajero.getColumnModel().getColumnCount() > 0) {
             JTComprasPasajero.getColumnModel().getColumn(0).setResizable(false);
-            JTComprasPasajero.getColumnModel().getColumn(0).setPreferredWidth(40);
+            JTComprasPasajero.getColumnModel().getColumn(0).setPreferredWidth(30);
             JTComprasPasajero.getColumnModel().getColumn(1).setResizable(false);
             JTComprasPasajero.getColumnModel().getColumn(1).setPreferredWidth(40);
             JTComprasPasajero.getColumnModel().getColumn(2).setResizable(false);
@@ -112,11 +113,11 @@ public class JDReporte_3 extends javax.swing.JDialog {
             JTComprasPasajero.getColumnModel().getColumn(5).setResizable(false);
             JTComprasPasajero.getColumnModel().getColumn(5).setPreferredWidth(20);
             JTComprasPasajero.getColumnModel().getColumn(6).setResizable(false);
-            JTComprasPasajero.getColumnModel().getColumn(6).setPreferredWidth(80);
+            JTComprasPasajero.getColumnModel().getColumn(6).setPreferredWidth(115);
             JTComprasPasajero.getColumnModel().getColumn(7).setResizable(false);
-            JTComprasPasajero.getColumnModel().getColumn(7).setPreferredWidth(30);
+            JTComprasPasajero.getColumnModel().getColumn(7).setPreferredWidth(20);
             JTComprasPasajero.getColumnModel().getColumn(8).setResizable(false);
-            JTComprasPasajero.getColumnModel().getColumn(8).setPreferredWidth(20);
+            JTComprasPasajero.getColumnModel().getColumn(8).setPreferredWidth(15);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,23 +125,23 @@ public class JDReporte_3 extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JCBCedulaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(JLTexto1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JLTexto2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JCBCedulaSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Arriba_Abajo, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(JLTexto2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                    .addComponent(Arriba_Abajo, javax.swing.GroupLayout.PREFERRED_SIZE, 861, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(29, 29, 29)
                 .addComponent(JLTexto1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JCBCedulaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(JCBCedulaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(JLTexto2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Arriba_Abajo, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)

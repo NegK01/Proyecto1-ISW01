@@ -26,6 +26,7 @@ public class JDReporte_1 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     public void Cargar_Table() {

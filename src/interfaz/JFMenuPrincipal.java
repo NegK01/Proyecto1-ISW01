@@ -19,6 +19,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     public JFMenuPrincipal(String usuarioTipo, Integer cedulaActual) throws ParseException {
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
         
         jdCreacionVuelos = new JDCreacionVuelos(this, rootPaneCheckingEnabled);
         jdBusquedaVuelos = new JDBusquedaVuelos(this, rootPaneCheckingEnabled, cedulaActual);
@@ -39,6 +40,8 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         if (usuarioTipo.equals("0")) {
             JMOpciones.remove(JMCreacionVuelos);
             JMOpciones.remove(JMReportes);
+        } else {
+            JMOpciones.remove(JMBusquedaVuelos);
         }
     }
 

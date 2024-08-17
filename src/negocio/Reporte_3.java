@@ -79,7 +79,7 @@ public class Reporte_3 {
                     Compra.add(asientosTotales);
                     
                 } else {
-                    asientosTotales = asientosTotales.replace("T", " ");
+                    asientosTotales = asientosTotales.replace("T", " | ");
                     Compra.add(asientosTotales);
                 }
                 
