@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import negocio.AsignacionDeAsientos;
 
 public class JDBusquedaVuelos extends javax.swing.JDialog {
 
@@ -23,15 +24,15 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
     private String salida;
     private String fecha;
     private Date dateFormat;
-
+    private Integer cedulaActual;
     private AeropuertoClassR aeropuertoClass;
 
-    public JDBusquedaVuelos(java.awt.Frame parent, boolean modal) {
+    public JDBusquedaVuelos(java.awt.Frame parent, boolean modal, Integer qweqweqw) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setSize(815, 380);
-
+        this.cedulaActual = qweqweqw;
         Cargar_ComboBox();
     }
 
@@ -142,17 +143,21 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
                     escala = "000";
                 }
             }
-
-            String vuelo_seleccionado = aero + " " + salida_in + " " + hora_in + " " + llegada_out 
-                    + " " + hora_out + " " + escala + " " + precio + " " + duracion + " " + cantidad 
-                    + " " + identificador;
+            
+            String vuelo_seleccionado = aero + "," + salida_in + "," + hora_in + "," + llegada_out 
+                    + "," + hora_out + "," + escala + "," + precio + "," + duracion + "," + cantidad 
+                    + "," + identificador + "," + cedulaActual;
             
             //Lo hago por si acaso en los siguentes procesos n se limpia
-            identificador = "";
+//            identificador = "";
 
-            System.out.println(vuelo_seleccionado);
+            AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
+            asignacionDeAsientos.AsignacionDeAsientos(vuelo_seleccionado);
+
+            System.out.println(vuelo_seleccionado + " JDBusqueda");
             
         } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error...Seleccione un vuelo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -203,11 +208,6 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         JTTexto3.setText("Fecha de salida:");
         getContentPane().add(JTTexto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 210, 30));
 
-        JDCFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                JDCFechaSalidaPropertyChange(evt);
-            }
-        });
         JDCFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 JDCFechaSalidaPropertyChange(evt);
@@ -344,7 +344,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDBusquedaVuelos dialog = new JDBusquedaVuelos(new javax.swing.JFrame(), true);
+                JDBusquedaVuelos dialog = new JDBusquedaVuelos(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

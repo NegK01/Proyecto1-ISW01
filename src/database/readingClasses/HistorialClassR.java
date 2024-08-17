@@ -18,7 +18,7 @@ public class HistorialClassR {
     private List<String> ASIENTOS;
     private List<Integer> DURACIONHORAS;
     private List<Integer> DURACIONMINUTOS;
-    private List<Double> COSTO;
+    private List<Integer> COSTO;
     private String FILEPATH;
     private String TXT_SPLIT;
 
@@ -50,7 +50,7 @@ public class HistorialClassR {
 
                 String[] partes = linea.split(TXT_SPLIT);
                 try {
-                    ID.add(Integer.parseInt(partes[0].trim()));
+                    ID.add( Integer.parseInt(partes[0].trim()));
                     CEDULA.add(Integer.parseInt(partes[1].trim()));
                     ID_SALIDA.add(Integer.parseInt(partes[2].trim()));
                     ID_LLEGADA.add(Integer.parseInt(partes[3].trim()));
@@ -64,7 +64,7 @@ public class HistorialClassR {
                     ASIENTOS.add(partes[7].trim());
                     DURACIONHORAS.add(Integer.parseInt(partes[8].trim()));
                     DURACIONMINUTOS.add(Integer.parseInt(partes[9].trim()));
-                    COSTO.add(Double.parseDouble(partes[10].trim()));
+                    COSTO.add(Integer.parseInt(partes[10].trim()));
 
                 } catch (NumberFormatException e) {
                     System.out.println("\u001B[31mERROR:\u001B[0m " + e.getMessage());
@@ -125,7 +125,15 @@ public class HistorialClassR {
         return DURACIONMINUTOS;
     }
 
-    public List<Double> getCOSTO() {
+    public List<Integer> getCOSTO() {
         return COSTO;
+    }
+
+    public String getFILEPATH() {
+        return FILEPATH;
+    }
+
+    public String getTXT_SPLIT() {
+        return TXT_SPLIT;
     }
 }

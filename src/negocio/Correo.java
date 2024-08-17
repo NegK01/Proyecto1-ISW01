@@ -48,10 +48,10 @@ public class Correo {
     public void EnviarCorreo() throws java.text.ParseException {
         HistorialClassR historial = new HistorialClassR();
         historial.leerHistorialTxt();
-        
+
         UsuariosClassR usuarios = new UsuariosClassR();
         usuarios.LeerUsuariosTxt();
-        
+
         Integer indice = historial.getCEDULA().size() - 1;
         Integer cedula = historial.getCEDULA().get(indice);
         for (int i = 0; i < usuarios.getCEDULA().size(); i++) {
@@ -59,7 +59,7 @@ public class Correo {
                 correo = usuarios.getCORREO().get(i);
             }
         }
-        
+
         // Configuración del servidor SMTP, usamos el servicio host de gmail
         String host = "smtp.gmail.com";
         String port = "587"; // el puerto por defecto de este host
@@ -79,7 +79,7 @@ public class Correo {
                 return new PasswordAuthentication(user, password);
             }
         });
-        
+
         try {
             // Crear un objeto MimeMessage
             Message message = new MimeMessage(session);
@@ -125,11 +125,9 @@ public class Correo {
 
         AeropuertoClassR aero = new AeropuertoClassR();
         aero.leerAeropuertoTxt();
-        
-        
+
         Integer factura = historial.getCEDULA().size() - 1;
 
-        
         Date fecha = historial.getFECHA().get(factura);
         Integer identificador = historial.getID().get(factura);
 
@@ -153,30 +151,36 @@ public class Correo {
         for (int j = 0; j < aero.getID().size(); j++) {
             if (aero.getID().get(j).equals(id_1)) {
                 String aero_1 = aero.getNOMBRE().get(j);
-                
+
                 salida = aero_1.replace("Aeropuerto Internacional", "");
                 salida = salida.replace("de", "");
 
             } else if (aero.getID().get(j).equals(id_2)) {
                 String aero_2 = aero.getNOMBRE().get(j);
-                
+
                 llegada = aero_2.replace("Aeropuerto Internacional", "");
                 llegada = llegada.replace("de", "");
 
             } else if (aero.getID().get(j).equals(id_3)) {
                 String aero_3 = aero.getNOMBRE().get(j);
-                
+
                 escala = aero_3.replace("Aeropuerto Internacional", "");
                 escala = escala.replace("de", "");
             }
         }
-        
+
         String asientos = historial.getASIENTOS().get(factura);
+        
+        asientos = asientos.replace("-", " ");
+        if (!escala.equals("Sin escala")) {
+
+            asientos = asientos.replace("T", " ");
+        } 
+
         Integer cantidad = historial.getCAN_BOLETOS().get(factura);
         Integer horas = historial.getDURACIONHORAS().get(factura);
         Integer minutos = historial.getDURACIONMINUTOS().get(factura);
-        Double total = historial.getCOSTO().get(factura);
-        
+        Integer total = historial.getCOSTO().get(factura);
 
         String recibo = """
                       ---------------------------------------------
@@ -208,9 +212,9 @@ public class Correo {
                       ---------------------------------------------
                       """;
 
-        String text = String.format(recibo, fecha, identificador, nombre, 
-                cedula, salida, llegada, escala, asientos, cantidad, 
-                horas,minutos, total);
+        String text = String.format(recibo, fecha, identificador, nombre,
+                cedula, salida, llegada, escala, asientos, cantidad,
+                horas, minutos, total);
 
         System.out.println(text);
 
