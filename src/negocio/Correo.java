@@ -1,8 +1,12 @@
 package negocio;
 
-import net.glxn.qrgen.QRCode;
+import java.util.*;
+import database.readingClasses.AeropuertoClassR;
+import database.readingClasses.HistorialClassR;
+import database.readingClasses.UsuariosClassR;
 import net.glxn.qrgen.image.ImageType;
 import java.io.FileOutputStream;
+import net.glxn.qrgen.QRCode;
 import java.io.IOException;
 import java.io.File;
 import javax.mail.*;
@@ -11,18 +15,22 @@ import java.util.Properties;
 
 public class Correo {
 
+    private String correo;
     private boolean compra = true;
 
-    public void Correo() {
-        if (compra) {
+    public void Correo() throws java.text.ParseException {
+        if (compra == true) {
+            generarRecibo();
             QRCodeGenerator();
             EnviarCorreo();
         }
     }
 
-    public void QRCodeGenerator() {
+    public void QRCodeGenerator() throws java.text.ParseException {
         try {
-            String text = "QR Texto \nPrueba linea";  // Texto que tendra nuestro QR
+
+            String text = generarRecibo();
+
             File file = new File("src/database/files/QRCode.png");
 
             QRCode.from(text)
@@ -37,12 +45,26 @@ public class Correo {
 
     }
 
-    public void EnviarCorreo() {
+    public void EnviarCorreo() throws java.text.ParseException {
+        HistorialClassR historial = new HistorialClassR();
+        historial.leerHistorialTxt();
+
+        UsuariosClassR usuarios = new UsuariosClassR();
+        usuarios.LeerUsuariosTxt();
+
+        Integer indice = historial.getCEDULA().size() - 1;
+        Integer cedula = historial.getCEDULA().get(indice);
+        for (int i = 0; i < usuarios.getCEDULA().size(); i++) {
+            if (usuarios.getCEDULA().get(i).equals(cedula)) {
+                correo = usuarios.getCORREO().get(i);
+            }
+        }
+
         // Configuración del servidor SMTP, usamos el servicio host de gmail
         String host = "smtp.gmail.com";
         String port = "587"; // el puerto por defecto de este host
         final String user = "mandangaymerequetengue@gmail.com"; // Correo con el que enviaremos los datos
-        final String password = "anwz qawd elpi tbhw"; // el token de nuestro correo
+        final String password = "anwz qawd elpi tbhw"; // el token de nuestro correo, (recordar deshabilitarlo)
 
         // Propiedades del correo donde asignamos el host, puerto y autenticacion
         Properties props = new Properties();
@@ -62,7 +84,7 @@ public class Correo {
             // Crear un objeto MimeMessage
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mauricio.or999@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
             message.setSubject("Factura Compra de Vuelo.");
 
             // Crear un cuerpo del email (texto nomas) 
@@ -88,9 +110,114 @@ public class Correo {
             Transport.send(message);
 
             System.out.println("\u001B[32mCorreo enviado exitosamente.\u001B[0m ");
+            correo = "";
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public String generarRecibo() throws java.text.ParseException {
+        HistorialClassR historial = new HistorialClassR();
+        historial.leerHistorialTxt();
+
+        UsuariosClassR usuarios = new UsuariosClassR();
+        usuarios.LeerUsuariosTxt();
+
+        AeropuertoClassR aero = new AeropuertoClassR();
+        aero.leerAeropuertoTxt();
+
+        Integer factura = historial.getCEDULA().size() - 1;
+
+        Date fecha = historial.getFECHA().get(factura);
+        Integer identificador = historial.getID().get(factura);
+
+        Integer cedula = historial.getCEDULA().get(factura);
+
+        String nombre = "";
+        for (int i = 0; i < usuarios.getCEDULA().size(); i++) {
+            if (usuarios.getCEDULA().get(i).equals(cedula)) {
+                nombre = usuarios.getNOMBRES().get(i);
+            }
+        }
+
+        Integer id_1 = historial.getID_SALIDA().get(factura);
+        Integer id_2 = historial.getID_LLEGADA().get(factura);
+        Integer id_3 = historial.getID_ESCALA().get(factura);
+
+        String salida = "";
+        String llegada = "";
+        String escala = "Sin escala";
+
+        for (int j = 0; j < aero.getID().size(); j++) {
+            if (aero.getID().get(j).equals(id_1)) {
+                String aero_1 = aero.getNOMBRE().get(j);
+
+                salida = aero_1.replace("Aeropuerto Internacional", "");
+                salida = salida.replace("de", "");
+
+            } else if (aero.getID().get(j).equals(id_2)) {
+                String aero_2 = aero.getNOMBRE().get(j);
+
+                llegada = aero_2.replace("Aeropuerto Internacional", "");
+                llegada = llegada.replace("de", "");
+
+            } else if (aero.getID().get(j).equals(id_3)) {
+                String aero_3 = aero.getNOMBRE().get(j);
+
+                escala = aero_3.replace("Aeropuerto Internacional", "");
+                escala = escala.replace("de", "");
+            }
+        }
+
+        String asientos = historial.getASIENTOS().get(factura);
+        
+        asientos = asientos.replace("-", " ");
+        if (!escala.equals("Sin escala")) {
+
+            asientos = asientos.replace("T", " ");
+        } 
+
+        Integer cantidad = historial.getCAN_BOLETOS().get(factura);
+        Integer horas = historial.getDURACIONHORAS().get(factura);
+        Integer minutos = historial.getDURACIONMINUTOS().get(factura);
+        Integer total = historial.getCOSTO().get(factura);
+
+        String recibo = """
+                      ---------------------------------------------
+                        TU TRANSACCIÓN SE REALIZO CORRECTAMENTE
+                      ---------------------------------------------
+                      Fecha: %s
+                      Número de recibo: %s
+                      
+                      - - - - - - - - - - - - - - - - - - - - - - -
+                      
+                      Recibido de: %s
+                      ID del cliente: %s
+                      
+                      - - - - - - - - - - - - - - - - - - - - - - -
+                      
+                      Aeropuerto de salida:  %s
+                      Aeropuerto de llegada: %s
+                      Aeropuerto de escala:  %s
+                      
+                      Asientos asignados: %s
+                      
+                      - - - - - - - - - - - - - - - - - - - - - - -
+                      
+                      Cantidad de Boletos: %s
+                      Duracion total: %s:%s
+                      
+                      Total: %s
+                      
+                      ---------------------------------------------
+                      """;
+
+        String text = String.format(recibo, fecha, identificador, nombre,
+                cedula, salida, llegada, escala, asientos, cantidad,
+                horas, minutos, total);
+
+        System.out.println(text);
+
+        return text;
+    }
 }

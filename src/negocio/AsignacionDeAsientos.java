@@ -34,6 +34,7 @@ public class AsignacionDeAsientos {
     private Integer IDHistorial = 0;
     private boolean asientoEncontrado = false;
     private boolean isEscala = false;
+    private boolean isCompraExitosa = false;
 
     public AsignacionDeAsientos() {
         this.inicio_Registro = new Inicio_Registro();
@@ -99,6 +100,8 @@ public class AsignacionDeAsientos {
 
             // cada compra es una linea distinta pero con datos actualizados
             // puede que se repita el id del identificador, por ello vamos a agarrar siempre el ultimo, validar eso
+        } else {
+
         }
 
         matriz();
@@ -372,10 +375,7 @@ public class AsignacionDeAsientos {
 
         }
 
-//            }
-//      }
         asientoEncontrado = false;
-        // Llamar al método correspondiente basado en la cantidad de boletos
         switch (cantidadBoletos) {
             case "1" ->
                 boleto1();
@@ -390,26 +390,6 @@ public class AsignacionDeAsientos {
             default ->
                 throw new AssertionError("Cantidad de boletos no soportada: " + cantidadBoletos);
         }
-
-//         Mostrar la matriz de asientos para depuración
-//        System.out.println("\u001B[36mMatriz principal de asientos:\u001B[0m");
-//
-//        for (int i = 0; i < filas; i++) {
-//            for (int j = 0; j < columnas; j++) {
-//                System.out.print(asientosMatriz[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println("\u001B[36mFin matriz principal de asiento...\u001B[0m");
-//        
-//        System.out.println("\u001B[32mMatriz escala de asientos:\u001B[0m");
-//        for (int i = 0; i < filas; i++) {
-//            for (int j = 0; j < columnas; j++) {
-//                System.out.print(asientosMatrizEscala[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println("\u001B[32mFin matriz escala de asiento...\u001B[0m");
     }
 
     public void boleto1() {
@@ -908,8 +888,17 @@ public class AsignacionDeAsientos {
         cedula = cedulaActual;
     }
 
+    public boolean compraExitosa() {
+        if (asientoEncontrado) {
+            isCompraExitosa = true;
+        } else {
+            isCompraExitosa = false;
+        }
+        return isCompraExitosa;
+    }
+
     public void matriz() {
-//         Mostrar la matriz de asientos para depuración
+//         Mostrar la matriz de asientos
         System.out.println("test main:");
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
@@ -917,7 +906,7 @@ public class AsignacionDeAsientos {
             }
             System.out.println();
         }
-        System.out.println("Fin matriz test...");
+        System.out.println("Fin matriz main...");
 
         System.out.println("test escala:");
         for (int i = 0; i < filas; i++) {
@@ -926,6 +915,6 @@ public class AsignacionDeAsientos {
             }
             System.out.println();
         }
-        System.out.println("Fin matriz test...");
+        System.out.println("Fin matriz escala...");
     }
 }

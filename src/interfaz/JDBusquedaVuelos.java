@@ -153,6 +153,16 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
             AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
             asignacionDeAsientos.AsignacionDeAsientos(vuelo_seleccionado);
+            boolean compraExitosa = asignacionDeAsientos.compraExitosa();
+            System.out.println(compraExitosa);
+            
+            if (compraExitosa) {
+                // asdkasnhkjfhdsbfj
+                // correo
+            } else {
+                // mostrar joptionpane error, no asientos disponible
+            }
+            
 
             System.out.println(vuelo_seleccionado + " JDBusqueda");
             

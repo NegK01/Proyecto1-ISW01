@@ -3,6 +3,9 @@ package interfaz;
 import interfaz.JDRegistroPasajeros;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.*;
 
@@ -44,7 +47,7 @@ public class JFInicioSesión extends javax.swing.JFrame {
         });
     }
 
-    public void Comprobar_Inicio() {
+    public void Comprobar_Inicio() throws ParseException {
         //Variable string que almasena si es admin o pasajero
         String usuarioTipo = "";
 
@@ -167,7 +170,11 @@ public class JFInicioSesión extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBInicioSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBInicioSesiónActionPerformed
-        Comprobar_Inicio();
+        try {
+            Comprobar_Inicio();
+        } catch (ParseException ex) {
+            Logger.getLogger(JFInicioSesión.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_JBInicioSesiónActionPerformed
 
     private void JBRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRegistroActionPerformed

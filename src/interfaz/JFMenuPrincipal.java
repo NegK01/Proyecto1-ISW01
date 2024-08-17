@@ -3,23 +3,28 @@ package interfaz;
 
 import interfaz.JDBusquedaVuelos;
 import interfaz.JDCreacionVuelos;
-import interfaz.JDReportes;
+import interfaz.JDReporte_1;
 import interfaz.JFInicioSesión;
+import java.text.ParseException;
 import javax.swing.JDialog;
 
 public class JFMenuPrincipal extends javax.swing.JFrame {
     
     JDCreacionVuelos jdCreacionVuelos;
     JDBusquedaVuelos jdBusquedaVuelos;
-    JDReportes jdReportes;
+    JDReporte_1 jdReporte_1;
+    JDReporte_2 jdReporte_2;
+    JDReporte_3 jdReporte_3;
 
-    public JFMenuPrincipal(String usuarioTipo, Integer cedulaActual) {
+    public JFMenuPrincipal(String usuarioTipo, Integer cedulaActual) throws ParseException {
         initComponents();
         setLocationRelativeTo(null);
         
         jdCreacionVuelos = new JDCreacionVuelos(this, rootPaneCheckingEnabled);
         jdBusquedaVuelos = new JDBusquedaVuelos(this, rootPaneCheckingEnabled, cedulaActual);
-        jdReportes = new JDReportes(this, rootPaneCheckingEnabled);
+        jdReporte_1 = new JDReporte_1(this, rootPaneCheckingEnabled);
+        jdReporte_2 = new JDReporte_2(this, rootPaneCheckingEnabled);
+        jdReporte_3 = new JDReporte_3(this, rootPaneCheckingEnabled);
         
         HabilitarOpciones(usuarioTipo);
     }
@@ -45,7 +50,10 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         JMOpciones = new javax.swing.JMenu();
         JMCreacionVuelos = new javax.swing.JMenuItem();
         JMBusquedaVuelos = new javax.swing.JMenuItem();
-        JMReportes = new javax.swing.JMenuItem();
+        JMReportes = new javax.swing.JMenu();
+        JMReporte1 = new javax.swing.JMenuItem();
+        JMReporte2 = new javax.swing.JMenuItem();
+        JMReporte = new javax.swing.JMenuItem();
         JMCerrarSesion = new javax.swing.JMenuItem();
         JMSalir = new javax.swing.JMenu();
 
@@ -70,11 +78,31 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         JMOpciones.add(JMBusquedaVuelos);
 
         JMReportes.setText("Reportes");
-        JMReportes.addActionListener(new java.awt.event.ActionListener() {
+
+        JMReporte1.setText("Reporte 1");
+        JMReporte1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMReportesActionPerformed(evt);
+                JMReporte1ActionPerformed(evt);
             }
         });
+        JMReportes.add(JMReporte1);
+
+        JMReporte2.setText("Reporte 2");
+        JMReporte2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMReporte2ActionPerformed(evt);
+            }
+        });
+        JMReportes.add(JMReporte2);
+
+        JMReporte.setText("Reporte 3");
+        JMReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMReporteActionPerformed(evt);
+            }
+        });
+        JMReportes.add(JMReporte);
+
         JMOpciones.add(JMReportes);
 
         JMCerrarSesion.setText("Cerrar sesión");
@@ -123,16 +151,24 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         JDSetVisibleManager(jdBusquedaVuelos);
     }//GEN-LAST:event_JMBusquedaVuelosActionPerformed
 
-    private void JMReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReportesActionPerformed
-        JDSetVisibleManager(jdReportes);
-    }//GEN-LAST:event_JMReportesActionPerformed
-
     private void JMCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMCerrarSesionActionPerformed
         setVisible(false);
         
         JFInicioSesión inicio = new JFInicioSesión();
         inicio.setVisible(true);
     }//GEN-LAST:event_JMCerrarSesionActionPerformed
+
+    private void JMReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporte1ActionPerformed
+        JDSetVisibleManager(jdReporte_1);
+    }//GEN-LAST:event_JMReporte1ActionPerformed
+
+    private void JMReporte2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporte2ActionPerformed
+        JDSetVisibleManager(jdReporte_2);
+    }//GEN-LAST:event_JMReporte2ActionPerformed
+
+    private void JMReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMReporteActionPerformed
+        JDSetVisibleManager(jdReporte_3);
+    }//GEN-LAST:event_JMReporteActionPerformed
 
     public static void main(String args[]) {
 
@@ -177,7 +213,10 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMCerrarSesion;
     private javax.swing.JMenuItem JMCreacionVuelos;
     private javax.swing.JMenu JMOpciones;
-    private javax.swing.JMenuItem JMReportes;
+    private javax.swing.JMenuItem JMReporte;
+    private javax.swing.JMenuItem JMReporte1;
+    private javax.swing.JMenuItem JMReporte2;
+    private javax.swing.JMenu JMReportes;
     private javax.swing.JMenu JMSalir;
     // End of variables declaration//GEN-END:variables
 }

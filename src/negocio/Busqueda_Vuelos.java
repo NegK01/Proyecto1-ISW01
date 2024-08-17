@@ -123,17 +123,9 @@ public class Busqueda_Vuelos {
 
                                 if (vuelosClassR.getFECHA_OUT().get(i).before(vuelosClassR.getFECHA_IN().get(j))) {
 
-                                    //Sacamos solamente las oras de las dos fechas pra comparar
-                                    int hora1 = vuelosClassR.getFECHA_OUT().get(i).getHours();
-                                    int hora2 = vuelosClassR.getFECHA_IN().get(j).getHours();
-
-                                    //Si las horas de las escalas coinciden
-                                    if (hora1 < hora2) {
-                                        if (vuelosClassR.getID_OUT().get(j).equals(id_llegada)) {
-                                            id_escala1 = vuelosClassR.getID().get(i);
-                                            id_escala2 = vuelosClassR.getID().get(j);
-                                        }
-                                    }
+                                    id_escala1 = vuelosClassR.getID().get(i);
+                                    id_escala2 = vuelosClassR.getID().get(j);
+                                    
                                 }
                             }
                         }
