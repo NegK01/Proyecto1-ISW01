@@ -12,16 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/negocio/Main.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/interfaz/JFMenuPrincipal.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/negocio/AsignacionDeAsientos.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/writingClasses/HistorialClassW.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/negocio/Inicio_Registro.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Historial.txt</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Vuelos.txt</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/interfaz/JDBusquedaVuelos.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Aviones.txt</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Tripulaciones.txt</file>
         </group>
     </open-files>
 </project-private>

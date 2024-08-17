@@ -157,7 +157,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             System.out.println(vuelo_seleccionado + " JDBusqueda");
             
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31mERROR:\u001B[0m " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error...Seleccione un vuelo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
