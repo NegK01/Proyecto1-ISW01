@@ -1,3 +1,2 @@
 987654321,Admin,18,123,admin@gmail.com,1
-123456789,pepe,24,123,pepe@gmail.com,0
-123123123,Juan,45,123,asd@gmail.com,0
+123456789,pepe,24,123,pepe@gmail.com,1

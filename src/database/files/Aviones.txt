@@ -9,7 +9,7 @@
 909,Boeing 777,503,0
 110,Airbus A380,503,0
 211,Boeing 747,714,0
-312,Airbus A350,714,1
+312,Airbus A350,714,0
 413,Boeing 767,825,0
 514,Airbus A330,825,0
 615,Boeing 777X,638,0

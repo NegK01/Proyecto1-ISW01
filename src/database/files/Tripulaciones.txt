@@ -18,9 +18,9 @@
 901876543,Margaret Wright,503,Piloto,0
 123987654,Daniel Scott,503,Servicio al Cliente,0
 234098765,Rebecca Green,503,Servicio al Cliente,0
-345109876,Matthew Adams,714,Piloto,1
+345109876,Matthew Adams,714,Piloto,0
 456210987,Ashley Baker,714,Piloto,0
-567321098,Paul Gonzalez,714,Servicio al Cliente,1
+567321098,Paul Gonzalez,714,Servicio al Cliente,0
 678432109,Dorothy Nelson,714,Servicio al Cliente,0
 789543210,Anthony Carter,825,Piloto,0
 890654321,Jessica Mitchell,825,Piloto,0

@@ -32,28 +32,28 @@ public class Reporte_2 {
         
         HashSet<Integer> filtrarVuelos = new HashSet<>();
         for (Integer item : historial.getID()) {
-            filtrarVuelos.add(item);
-        }
 
-        for (Integer vuelo : filtrarVuelos) {
+            String identificador = item.toString();
 
-            String identificador = vuelo.toString();
-            
             String id_1 = String.valueOf(identificador).substring(0, 3);
             String id_2 = String.valueOf(identificador).substring(3, 6);
 
             Integer identiParte1 = Integer.parseInt(id_1);
             Integer identiParte2 = Integer.parseInt(id_2);
-            
-            for (int i = 0; i < historial.getID().size(); i++) {
 
-                if (vuelos.getID().get(i).equals(identiParte1) && vuelos.getID_AERO().get(i).equals(id_Aerolinea)) {
+            filtrarVuelos.add(identiParte1);
+
+            filtrarVuelos.add(identiParte2);
+        }
+
+        for (Integer vuelo : filtrarVuelos) {
+
+            for (int i = 0; i < vuelos.getID().size(); i++) {
+
+                if (vuelos.getID().get(i).equals(vuelo) && vuelos.getID_AERO().get(i).equals(id_Aerolinea)) {
 
                     buscarTripulacion(i);
 
-                } else if (vuelos.getID().get(i).equals(identiParte2) && vuelos.getID_AERO().get(i).equals(id_Aerolinea)) {
-
-                    buscarTripulacion(i);
                 }
             }
         }
@@ -72,12 +72,13 @@ public class Reporte_2 {
         ArrayList vuelo = new ArrayList();
 
         String cedulas = vuelos.getID_TRIPULACION().get(i);
+        String[] cedulasSplit = cedulas.split("\\.");
 
-        String cedulaInt1 = String.valueOf(cedulas).substring(0, 9);
-        String cedulaInt2 = String.valueOf(cedulas).substring(10, 19);
+//        String cedulaInt1 = String.valueOf(cedulas).substring(0, 9);
+//        String cedulaInt2 = String.valueOf(cedulas).substring(10, 19);
         
-        Integer cedulaPiloto = Integer.parseInt(cedulaInt1);
-        Integer cedulaMosa = Integer.parseInt(cedulaInt2);
+        Integer cedulaPiloto = Integer.valueOf(cedulasSplit[0]);
+        Integer cedulaMosa = Integer.valueOf(cedulasSplit[1]);
 
         String nombrePiloto = "";
         String nombreMosa = "";

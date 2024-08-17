@@ -1,10 +1,8 @@
 package negocio;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import database.readingClasses.HistorialClassR;
 import interfaz.JFInicioSesión;
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 

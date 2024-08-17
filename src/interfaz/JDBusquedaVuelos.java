@@ -153,11 +153,21 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
             AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
             asignacionDeAsientos.AsignacionDeAsientos(vuelo_seleccionado);
+            boolean compraExitosa = asignacionDeAsientos.compraExitosa();
+            System.out.println(compraExitosa);
+            
+            if (compraExitosa) {
+                // asdkasnhkjfhdsbfj
+                // correo
+            } else {
+                // mostrar joptionpane error, no asientos disponible
+            }
+            
 
             System.out.println(vuelo_seleccionado + " JDBusqueda");
             
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\u001B[31mERROR:\u001B[0m " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error...Seleccione un vuelo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -208,6 +218,11 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         JTTexto3.setText("Fecha de salida:");
         getContentPane().add(JTTexto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 210, 30));
 
+        JDCFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                JDCFechaSalidaPropertyChange(evt);
+            }
+        });
         JDCFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 JDCFechaSalidaPropertyChange(evt);
@@ -300,7 +315,15 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_JDCFechaSalidaPropertyChange
-
+//
+//    public void guardarCedulaActual(Integer cedulaDada) {
+//        cedulaActual1 = cedulaDada;
+//        System.out.println(cedulaDada);
+////        System.out.println(cedulaActual);
+//        AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
+////        asignacionDeAsientos.guardarCedulaActual(cedulaActual);
+//    }
+    
     private void JCAeroSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCAeroSalidaActionPerformed
         Comprobar_Busqueda();
     }//GEN-LAST:event_JCAeroSalidaActionPerformed

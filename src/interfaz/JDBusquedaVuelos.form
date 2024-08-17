@@ -101,6 +101,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JDCFechaSalida.getDateEditor().setEnabled(false);&#xa;JDCFechaSalida.getJCalendar().setForeground(Color.cyan);&#xa;&#xa;Calendar calendar = Calendar.getInstance();&#xa;JDCFechaSalida.setMinSelectableDate(calendar.getTime());&#xa;calendar.add(Calendar.YEAR, 1);&#xa;JDCFechaSalida.setMaxSelectableDate(calendar.getTime());&#xa;JDCFechaSalida.getDateEditor().setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JDCFechaSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {&#xa;    public void propertyChange(java.beans.PropertyChangeEvent evt) {&#xa;        JDCFechaSalidaPropertyChange(evt);&#xa;    }&#xa;});"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

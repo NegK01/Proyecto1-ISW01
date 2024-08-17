@@ -27,7 +27,6 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setSize(720, 380);
 
         cargarDatos();
     }
@@ -89,14 +88,14 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JCAerolinea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
-        jPanel1.add(JCAerolinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 320, -1));
+        jPanel1.add(JCAerolinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 170, -1));
 
         JTPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 JTPrecioKeyTyped(evt);
             }
         });
-        jPanel1.add(JTPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 210, -1));
+        jPanel1.add(JTPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 110, -1));
 
         JCAeropuertoSalida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
         jPanel1.add(JCAeropuertoSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 320, -1));
@@ -109,7 +108,7 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
                 JDFechaSalidaPropertyChange(evt);
             }
         });
-        jPanel1.add(JDFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 240, -1));
+        jPanel1.add(JDFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, -1));
         JDFechaSalida.getDateEditor().setEnabled(false);
         JDFechaSalida.getJCalendar().setForeground(Color.cyan);
 
@@ -120,26 +119,26 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         JDFechaSalida.getDateEditor().setDateFormatString("dd/MM/yyyy");
 
         jLabel5.setText("Fecha de salida:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 240, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 120, -1));
 
         JSHoraSalida.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        jPanel1.add(JSHoraSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 110, -1));
+        jPanel1.add(JSHoraSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 110, -1));
 
         jLabel6.setText("Hora y minutos de salida:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 210, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, -1));
 
         jLabel7.setText("Fecha de llegada:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 240, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, -1));
 
         jLabel8.setText("Hora y minutos de llegada: ");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 200, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 200, -1));
 
         JDFechaLlegada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 JDFechaLlegadaPropertyChange(evt);
             }
         });
-        jPanel1.add(JDFechaLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 240, -1));
+        jPanel1.add(JDFechaLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 130, -1));
         JDFechaLlegada.getDateEditor().setEnabled(false);
         JDFechaLlegada.getJCalendar().setForeground(Color.cyan);
 
@@ -152,19 +151,19 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
         JDFechaLlegada.getDateEditor().setDateFormatString("dd/MM/yyyy");
 
         JSHoraLlegada.setModel(new javax.swing.SpinnerNumberModel(0, valorMinimo, 23, 1));
-        jPanel1.add(JSHoraLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 110, -1));
+        jPanel1.add(JSHoraLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 110, -1));
 
         jLabel1.setText(" Aerolinea:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 320, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel2.setText(" Aeropuerto de salida:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 320, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jLabel3.setText(" Aeropuerto de llegada:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 320, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
 
         jLabel4.setText(" Precio:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 70, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
 
         JBAgregar.setText("Agregar");
         JBAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,23 +171,23 @@ public class JDCreacionVuelos extends javax.swing.JDialog {
                 JBAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(JBAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 120, 40));
+        jPanel1.add(JBAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 100, -1));
 
         JSMinutosSalida.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        jPanel1.add(JSMinutosSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 90, -1));
+        jPanel1.add(JSMinutosSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 80, -1));
 
         JSMinutosLlegada.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        jPanel1.add(JSMinutosLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 90, -1));
+        jPanel1.add(JSMinutosLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 80, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText(" :");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 10, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 10, 20));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText(" :");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 10, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 10, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 350));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
