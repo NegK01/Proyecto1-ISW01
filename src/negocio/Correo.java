@@ -176,8 +176,17 @@ public class Correo {
 
             asientos = asientos.replace("T", " | ");
         } 
-
-        Integer cantidad = historial.getCAN_BOLETOS().get(factura);
+        
+        Integer boletos = historial.getCAN_BOLETOS().get(factura);
+        Integer boletosEscala = 0;
+        if (!escala.equals("Sin escala")) {
+            
+            boletosEscala = boletos;
+            
+        }
+        
+        Integer boletosTotales = boletos + boletosEscala;
+        
         Integer horas = historial.getDURACIONHORAS().get(factura);
         Integer minutos = historial.getDURACIONMINUTOS().get(factura);
         Integer total = historial.getCOSTO().get(factura);
@@ -204,7 +213,12 @@ public class Correo {
                       
                       - - - - - - - - - - - - - - - - - - - - - - -
                       
-                      Cantidad de Boletos: %s
+                      Boletos de vuelo: %s
+                      Boletos de escala: %s
+                      Boletos totales: %s
+                        
+                      - - - - - - - - - - - - - - - - - - - - - - -
+                        
                       Duracion total: %s:%s
                       
                       Total: %s
@@ -213,8 +227,8 @@ public class Correo {
                       """;
 
         String text = String.format(recibo, fecha, identificador, nombre,
-                cedula, salida, llegada, escala, asientos, cantidad,
-                horas, minutos, total);
+                cedula, salida, llegada, escala, asientos, boletos, 
+                boletosEscala, boletosTotales,horas, minutos, total);
 
         System.out.println(text);
 

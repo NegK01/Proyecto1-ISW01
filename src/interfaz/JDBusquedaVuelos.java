@@ -34,7 +34,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setSize(815, 380);
         setResizable(false);
-        
+
         this.cedulaActual = qweqweqw;
         Cargar_ComboBox();
     }
@@ -159,8 +159,13 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             System.out.println(compraExitosa);
 
             if (compraExitosa) {
+                JDMatriz jdMatriz = new JDMatriz(null, compraExitosa,
+                        asignacionDeAsientos.getAsientosMatriz(),
+                        asignacionDeAsientos.getAsientosMatrizEscala());
+                jdMatriz.setVisible(true);
 //                Correo correo = new Correo();
 //                correo.Correo();
+
             } else {
                 JOptionPane.showMessageDialog(null, "Vuelo actualmente lleno",
                         "Error", JOptionPane.CANCEL_OPTION);
@@ -338,8 +343,8 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
             Object[] opciones = {"Seleccionar vuelo", "Cancelar"};
 
-            int respuesta = JOptionPane.showOptionDialog(null,"¿Desea elegir este vuelo?","Confirmación",
-                    JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0]);
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Desea elegir este vuelo?", "Confirmación",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
             if (respuesta == JOptionPane.YES_OPTION) {
                 Vuelo_Seleccionado();

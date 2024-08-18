@@ -1,7 +1,7 @@
-123456789,John Smith,142,Piloto,1
-234567890,Emily Johnson,142,Piloto,1
-345678901,Sarah Williams,142,Servicio al Cliente,1
-456789012,Michael Brown,142,Servicio al Cliente,1
+123456789,John Smith,142,Piloto,0
+234567890,Emily Johnson,142,Piloto,0
+345678901,Sarah Williams,142,Servicio al Cliente,0
+456789012,Michael Brown,142,Servicio al Cliente,0
 567890123,James Jones,375,Piloto,0
 678901234,Linda Garcia,375,Piloto,0
 789012345,David Martinez,375,Servicio al Cliente,0

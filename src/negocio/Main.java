@@ -1,6 +1,7 @@
 package negocio;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import interfaz.JDMatriz;
 import interfaz.JFInicioSesión;
 import java.text.ParseException;
 import javax.swing.UIManager;
@@ -28,6 +29,9 @@ public class Main {
         
         JFInicioSesión inicio = new JFInicioSesión();
         inicio.setVisible(true);
+
+//        JDMatriz matriz = new JDMatriz(inicio, true, null, null);
+//        matriz.setVisible(true);
         
         
     }

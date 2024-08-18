@@ -897,6 +897,14 @@ public class AsignacionDeAsientos {
         return isCompraExitosa;
     }
 
+    public Integer[][] getAsientosMatriz() {
+        return asientosMatriz;
+    }
+
+    public Integer[][] getAsientosMatrizEscala() {
+        return asientosMatrizEscala;
+    }
+
     public void matriz() {
 //         Mostrar la matriz de asientos
         System.out.println("test main:");

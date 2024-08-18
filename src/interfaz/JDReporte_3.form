@@ -23,24 +23,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="JCBCedulaSelect" min="-2" pref="379" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="JLTexto1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="JLTexto2" alignment="0" pref="350" max="32767" attributes="0"/>
+                      <Component id="JLTexto2" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="Arriba_Abajo" min="-2" pref="861" max="-2" attributes="0"/>
+                  <Component id="Arriba_Abajo" alignment="0" min="-2" pref="881" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="JLTexto1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="JCBCedulaSelect" min="-2" pref="38" max="-2" attributes="0"/>
@@ -48,7 +48,7 @@
               <Component id="JLTexto2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Arriba_Abajo" pref="167" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,7 +136,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="115" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="151" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>

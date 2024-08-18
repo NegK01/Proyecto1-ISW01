@@ -66,6 +66,12 @@ public class JFInicioSesión extends javax.swing.JFrame {
             if (usuarioTipo.equals("0") || usuarioTipo.equals("1")) {
                 //Se cierra el inicio de sesion y despues se abre el menu de opciones
                 setVisible(false);
+
+                //Habilitamos el menu principal y mandamos la variable usuario tipo
+                //para restringir diferentes opciones
+                System.out.println(cedula);
+//                enviarCedula.guardarCedulaActual(cedula);
+                
                 
                 JFMenuPrincipal menu = new JFMenuPrincipal(usuarioTipo, cedula);
                 menu.setVisible(true);
