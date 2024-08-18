@@ -16,6 +16,7 @@ public class JFInicioSesión extends javax.swing.JFrame {
     public JFInicioSesión() {
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
 
         Restringir_Datos();
     }

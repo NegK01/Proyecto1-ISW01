@@ -3,6 +3,7 @@ package interfaz;
 import database.readingClasses.AerolineaClassR;
 import database.readingClasses.AeropuertoClassR;
 import database.readingClasses.HistorialClassR;
+import negocio.Correo;
 import negocio.Busqueda_Vuelos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,7 +20,7 @@ import negocio.AsignacionDeAsientos;
 public class JDBusquedaVuelos extends javax.swing.JDialog {
 
     private String identificador;
-    
+
     private String llegada;
     private String salida;
     private String fecha;
@@ -32,6 +33,8 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setSize(815, 380);
+        setResizable(false);
+
         this.cedulaActual = qweqweqw;
         Cargar_ComboBox();
     }
@@ -72,7 +75,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             Vuelos = negocio.Mostrar_Vuelos(salida, llegada, dateFormat);
 
             cargar_Vuelos(Vuelos);
-            
+
         } else {
             DefaultTableModel Modelo = (DefaultTableModel) JTVuelosDisponibles.getModel();
             Modelo.setRowCount(0);
@@ -88,7 +91,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
             ArrayList vuelo = new ArrayList();
             vuelo = (ArrayList) Vuelos.get(i);
-            
+
             //CUIDADO CON ESTO
             identificador = vuelo.get(8).toString();
 
@@ -100,15 +103,15 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
     public void Vuelo_Seleccionado() throws ParseException {
         AeropuertoClassR aeropuertoClassR = new AeropuertoClassR();
         aeropuertoClassR.leerAeropuertoTxt();
-        
+
         AerolineaClassR aerolineaClassR = new AerolineaClassR();
         aerolineaClassR.leerAerolineaTxt();
-        
+
         HistorialClassR historial = new HistorialClassR();
         historial.leerHistorialTxt();
-        
+
         int vainaSeleccionadaRow;
-        
+
         try {
             vainaSeleccionadaRow = JTVuelosDisponibles.getSelectedRow();
 
@@ -121,57 +124,60 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
             String precio = JTVuelosDisponibles.getValueAt(vainaSeleccionadaRow, 6).toString();
             String duracion = JTVuelosDisponibles.getValueAt(vainaSeleccionadaRow, 7).toString();
             String cantidad = JSCantidad.getValue().toString();
-            
+
             for (int j = 0; j < aerolineaClassR.getNOMBRE().size(); j++) {
                 if (aerolineaClassR.getNOMBRE().get(j).contains(aero)) {
                     aero = aerolineaClassR.getID().get(j).toString();
-                    
+
                 }
             }
-            
+
             for (int i = 0; i < aeropuertoClassR.getNOMBRE().size(); i++) {
                 if (aeropuertoClassR.getNOMBRE().get(i).contains(salida_in)) {
                     salida_in = aeropuertoClassR.getID().get(i).toString();
-                    
+
                 } else if (aeropuertoClassR.getNOMBRE().get(i).contains(llegada_out)) {
                     llegada_out = aeropuertoClassR.getID().get(i).toString();
-                    
+
                 } else if (aeropuertoClassR.getNOMBRE().get(i).contains(escala)) {
                     escala = aeropuertoClassR.getID().get(i).toString();
-                    
+
                 } else if (escala.contains("Sin escala")) {
                     escala = "000";
                 }
             }
-            
-            String vuelo_seleccionado = aero + "," + salida_in + "," + hora_in + "," + llegada_out 
-                    + "," + hora_out + "," + escala + "," + precio + "," + duracion + "," + cantidad 
+
+            String vuelo_seleccionado = aero + "," + salida_in + "," + hora_in + "," + llegada_out
+                    + "," + hora_out + "," + escala + "," + precio + "," + duracion + "," + cantidad
                     + "," + identificador + "," + cedulaActual;
-            
+
             //Lo hago por si acaso en los siguentes procesos n se limpia
 //            identificador = "";
-
             AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
             asignacionDeAsientos.AsignacionDeAsientos(vuelo_seleccionado);
             boolean compraExitosa = asignacionDeAsientos.compraExitosa();
             System.out.println(compraExitosa);
-            
+
             if (compraExitosa) {
-                // asdkasnhkjfhdsbfj
-                // correo
+                JDMatriz jdMatriz = new JDMatriz(null, compraExitosa,
+                        asignacionDeAsientos.getAsientosMatriz(),
+                        asignacionDeAsientos.getAsientosMatrizEscala());
+                jdMatriz.setVisible(true);
+//                Correo correo = new Correo();
+//                correo.Correo();
+
             } else {
-                // mostrar joptionpane error, no asientos disponible
+                JOptionPane.showMessageDialog(null, "Vuelo actualmente lleno",
+                        "Error", JOptionPane.CANCEL_OPTION);
             }
-            
 
             System.out.println(vuelo_seleccionado + " JDBusqueda");
-            
+
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("\u001B[31mERROR:\u001B[0m " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error...Seleccione un vuelo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -323,7 +329,7 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 //        AsignacionDeAsientos asignacionDeAsientos = new AsignacionDeAsientos();
 ////        asignacionDeAsientos.guardarCedulaActual(cedulaActual);
 //    }
-    
+
     private void JCAeroSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCAeroSalidaActionPerformed
         Comprobar_Busqueda();
     }//GEN-LAST:event_JCAeroSalidaActionPerformed
@@ -334,7 +340,16 @@ public class JDBusquedaVuelos extends javax.swing.JDialog {
 
     private void JTVuelosDisponiblesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTVuelosDisponiblesMouseClicked
         try {
-            Vuelo_Seleccionado();
+
+            Object[] opciones = {"Seleccionar vuelo", "Cancelar"};
+
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Desea elegir este vuelo?", "Confirmación",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                Vuelo_Seleccionado();
+            }
+
         } catch (ParseException ex) {
             Logger.getLogger(JDBusquedaVuelos.class.getName()).log(Level.SEVERE, null, ex);
         }

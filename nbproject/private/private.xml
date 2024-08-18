@@ -14,8 +14,10 @@
         <group>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/negocio/AsignacionDeAsientos.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/writingClasses/HistorialClassW.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/readingClasses/HistorialClassR.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Historial.txt</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/database/files/Vuelos.txt</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Proyecto/src/interfaz/JDBusquedaVuelos.java</file>
         </group>
     </open-files>
 </project-private>

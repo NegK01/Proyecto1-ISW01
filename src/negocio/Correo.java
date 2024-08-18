@@ -174,7 +174,7 @@ public class Correo {
         asientos = asientos.replace("-", " ");
         if (!escala.equals("Sin escala")) {
 
-            asientos = asientos.replace("T", " ");
+            asientos = asientos.replace("T", " | ");
         } 
 
         Integer cantidad = historial.getCAN_BOLETOS().get(factura);
